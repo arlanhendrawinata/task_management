@@ -112,13 +112,13 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label>New Password</label>
-                                            <input type="password" placeholder="Masukkan Password Baru" class="form-control " name="password" id="password" />
+                                            <input type="password" placeholder="Masukkan Password Baru" class="form-control " name="password" id="password" onkeyup="checkOldPassword()">
                                             <i class="bi bi-eye-slash p-2" id="togglePassword" style="cursor:pointer; position: relative;
                                             left: 94%; bottom:80%"></i>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label>Confirm Password</label>
-                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onkeyup="checkPassword()">
+                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onkeyup="checkOldPassword()">
                                             <i class="bi bi-eye-slash p-2" id="toggleConfirmPassword" style="cursor:pointer; position: relative;
                                             left: 94%; bottom:80%"></i>
                                         </div>

@@ -289,17 +289,16 @@
             
             if (oldPassword != "") {
                 document.getElementById('submit').disabled = true;
+                checkPassword();
                 
             } else {
                 document.getElementById('submit').disabled = false;
+                document.getElementById('alertConfirmPassword-false').style.display = 'none';
             }
 
         }
 
         function checkPassword() {
-
-           
-
 
 
             let passwordCP = document.getElementById("password").value;
@@ -308,6 +307,7 @@
            
 
             if (passwordCP == "") {
+                document.getElementById('submit').disabled = true;
                 
             }
             else{
@@ -337,9 +337,9 @@
 
             
 
-            if (confirmpasswordCP == "" || passwordCP == "" || oldPassword == "") {
+            if (confirmpasswordCP == "" || passwordCP == "") {
                 document.getElementById('alertConfirmPassword-false').style.display = 'none';
-                document.getElementById('submit').disabled = false;
+                document.getElementById('submit').disabled = true;
             }
 
             if (confirmpasswordCP == "" && passwordCP == "" && oldPassword == "") {
