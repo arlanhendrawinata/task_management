@@ -1,0 +1,18 @@
+ADMIN :
+lisaa@gmail.com
+lisaa1234
+
+MANAJEMEN:
+micci@gmail.com
+micci1234
+
+LEAD TIM:
+Andiraa@gmail.com
+1234567
+
+ANGGOTA TIM:
+minggy@gmail.com
+mig1234
+
+nael@gmail.com
+1234567
