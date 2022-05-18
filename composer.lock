@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d024cb6b9952d5e88c9a9b2a3313e938",
+    "content-hash": "972e9b2d6ef99b85939696952c3e28e8",
     "packages": [
+        {
+            "name": "101infotech/imgbb",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/101INFOTECH/ImgBB.git",
+                "reference": "aecba06913ec1314f6ab2e7429be0d655dc53e34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/101INFOTECH/ImgBB/zipball/aecba06913ec1314f6ab2e7429be0d655dc53e34",
+                "reference": "aecba06913ec1314f6ab2e7429be0d655dc53e34",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Infotech\\ImgBB\\ImgBBServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Infotech\\ImgBB\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "101infotech",
+                    "email": "help@101infotech.com.np"
+                }
+            ],
+            "description": "Simple Way to upload image using imgbb api without any fuss.",
+            "support": {
+                "issues": "https://github.com/101INFOTECH/ImgBB/issues",
+                "source": "https://github.com/101INFOTECH/ImgBB/tree/v1.1.0"
+            },
+            "time": "2022-03-21T06:49:32+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.9.3",
