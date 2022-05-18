@@ -76,8 +76,9 @@ class FinanceController extends Controller
      */
     public function edit($id)
     {
-        $finance = Finance::where('id', $id)->get();
-        return view('admin.finance.edit', compact('finance'));
+        $finance = Finance::where('id', $id)->first();
+        $title = "Edit Finance";
+        return view('admin.finance.finance_edit', compact('finance', 'title'));
     }
 
     /**
@@ -87,9 +88,21 @@ class FinanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $finance = Finance::find($request->id);
+        $data = array(
+            'name' => ucwords($request->name),
+            'detail' => ucfirst($request->detail),
+            'img' => $request->foto,
+            'value' => $request->value,
+            'type' => ucwords($request->type),
+            'offices_id' => $request->offices_id,
+            'users_id' => Auth::id(),
+            'status' => 1,
+        );
+        $finance->update($data);
+        return redirect()->route('admin-finance-index')->with('success', 'New finance has been updated');
     }
 
     public function status(Request $request)

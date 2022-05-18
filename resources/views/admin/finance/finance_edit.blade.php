@@ -12,16 +12,24 @@
   </div>
   <div class="card-body">
     <div class="form-validation">
-      <form class="form-valide" action="{{ route('admin-finance-update') }}" enctype="multipart/form-data" method="post">
+      <form class="form-valide" action="{{ route('admin-finance-update') }}" enctype="multipart/form-data" method="POST">
         @csrf
+        @method("put")
         <div class="row mb-4">
           <div class="col-xl-6">
+            <div class="form-group row">
+              <label class="col-lg-4 col-form-label" for="id-divisi">ID <span class="text-danger">*</span>
+              </label>
+              <div class="col-lg-6">
+                <input type="text" class="form-control" id="id-divisi" readonly name="id" placeholder="Enter Team ID" value="{{ $finance->id }}" readonly>
+              </div>
+            </div>
             <div class="form-group row">
               <label class="col-lg-4 col-form-label" for="val-name">Name
                 <span class="text-danger">*</span>
               </label>
               <div class="col-lg-6">
-                <input type="text" class="form-control" id="val-name" name="name" placeholder="Input name" value="" required>
+                <input type="text" class="form-control" id="val-name" name="name" placeholder="Input name" value="{{ $finance->name }}" required>
               </div>
             </div>
             <div class="form-group row">
@@ -29,7 +37,7 @@
                 <span class="text-danger">*</span>
               </label>
               <div class="col-lg-6">
-                <textarea class="form-control" id="val-detail" name="detail" rows="5" placeholder="Describe your finance" required></textarea>
+                <textarea class="form-control" id="val-detail" name="detail" rows="5" placeholder="Describe your finance" required>{{ $finance->detail }}</textarea>
               </div>
             </div>
             <div class="form-group row">
@@ -48,7 +56,7 @@
                 <!--<span class="text-danger">*</span>-->
               </label>
               <div class="col-lg-6">
-                <input type="number" class="form-control" id="val-value" name="value" value="0">
+                <input type="number" class="form-control" id="val-value" name="value" value="{{$finance->value}}">
               </div>
             </div>
             <div class="form-group row">

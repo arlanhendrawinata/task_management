@@ -32,8 +32,7 @@
                 <span class="text-danger">*</span>
               </label>
               <div class="col-lg-6">
-                <textarea class="form-control" id="val-detail" name="detail" rows="5"
-                  placeholder="Describe your finance" required></textarea>
+                <textarea class="form-control" id="val-detail" name="detail" rows="5" placeholder="Describe your finance" required></textarea>
               </div>
             </div>
             <div class="form-group row">
@@ -42,8 +41,7 @@
               </label>
               <div class="col-lg-6">
                 <img class="img-preview">
-                <input type="file" class="form-control" id="foto" name="foto" placeholder="Insert Foto"
-                  onchange="previewImageUsersCRUD()">
+                <input type="file" class="form-control" id="foto" name="foto" placeholder="Insert Foto" onchange="previewImageUsersCRUD()">
               </div>
             </div>
           </div>
