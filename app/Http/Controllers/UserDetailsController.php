@@ -104,23 +104,22 @@ class UserDetailsController extends Controller
 
         // $passDecrypt = Crypt::decryptString($request->password);
         // $passEncrypt = Crypt::encryptString($request->password);
-       
-        
+
+
         $passEncrypt = Hash::make($request->password);
         $userDetail = UserDetail::where('user_id', auth()->user()->id)->first();
         $data = array(
             'no_telp' => $request->no_telp,
             'alamat' => $request->alamat,
             'nip' => $request->nip,
-            
+
 
             // 'foto' => $request->file('foto')->store('users'), 
         );
         if ($request->file('foto')) {
-            $namaasli = $request->file('foto')->getClientOriginalName();             
+            $namaasli = $request->file('foto')->getClientOriginalName();
             $image = ImgBB::image($request->file('foto'), $namaasli);
             $data['foto'] =  $image["data"]["url"];
-           
         }
         $userDetail->update($data);
         // DB::table('companies')->where('id', auth()->user()->user_details->perusahaan_id)->update([
