@@ -136,7 +136,6 @@ class UserDetailsController extends Controller
             if(password_verify($request->oldPassword, auth()->user()->password)){
                 $data2['password'] = $passEncrypt;                
             }else{
-                dd("huhu");
              return $this->index()->with('error', 'Password Wrong');
             }                
         }
