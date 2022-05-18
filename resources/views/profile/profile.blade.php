@@ -104,13 +104,19 @@
                                         <input type="email" placeholder="Email" class="form-control" value="{{  auth()->user()->email }}" name="email" required>
                                     </div>
                                     <div class="form-row d-flex flex-row-revers">
-                                        <div class="form-group col-md-6 ">
-                                            <label>Password</label>
+                                        <div class="form-group col-md-4">
+                                            <label>Old Password</label>
+                                            <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Old Password" onkeyup="checkOldPassword()" value="">
+                                            <i class="bi bi-eye-slash p-2" id="toggleOldPassword" style="cursor:pointer; position: relative;
+                                            left: 94%; bottom:80%"></i>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>New Password</label>
                                             <input type="password" placeholder="Masukkan Password Baru" class="form-control " name="password" id="password" />
                                             <i class="bi bi-eye-slash p-2" id="togglePassword" style="cursor:pointer; position: relative;
                                             left: 94%; bottom:80%"></i>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label>Confirm Password</label>
                                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onkeyup="checkPassword()">
                                             <i class="bi bi-eye-slash p-2" id="toggleConfirmPassword" style="cursor:pointer; position: relative;
@@ -118,12 +124,12 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6"></div>
+                                        <div class="form-group col-md-12"></div>
 
-                                        <div class="alert alert-danger col-md-6" role="alert" id="alertConfirmPassword-false" style="display: none;">
+                                        <div class="alert alert-danger col-md-12" role="alert" id="alertConfirmPassword-false" style="display: none;">
                                             Password doesn't match !
                                         </div>
-                                        <div class="alert alert-success col-md-6" role="alert" id="alertConfirmPassword-true" style="display: none;">
+                                        <div class="alert alert-success col-md-12" role="alert" id="alertConfirmPassword-true" style="display: none;">
                                             Password match !
                                         </div>
 
