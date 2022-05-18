@@ -134,9 +134,9 @@ class UserDetailsController extends Controller
 
         if ($request->input('oldPassword')) {                                                
             if(password_verify($request->oldPassword, auth()->user()->password)){
-                $data2['password'] = $passEncrypt;                
+                $data2['password'] = $passEncrypt;                                    
             }else{
-             return $this->index()->with('error', 'Password Wrong');
+                return redirect()->route('profile-profile')->with('errors', 'Password Wrong');                
             }                
         }
         $users->update($data2);
@@ -145,6 +145,7 @@ class UserDetailsController extends Controller
         // ]);       
 
         auth()->user($users);
+        
         return redirect()->route('profile-profile')->with('success', 'Berhasil Edit Profile');
     }
 
