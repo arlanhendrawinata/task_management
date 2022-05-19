@@ -131,9 +131,13 @@ class UserDetailsController extends Controller
             // 'password' => $request->password,
             'nama' => $request->nama,
         );
-        if ($request->input('password')) {
 
-            $data2['password'] = $passEncrypt;
+        if ($request->input('oldPassword')) {                                                
+            if(password_verify($request->oldPassword, auth()->user()->password)){
+                $data2['password'] = $passEncrypt;                                    
+            }else{
+                return redirect()->route('profile-profile')->with('errors', 'Password Wrong');                
+            }                
         }
         $users->update($data2);
         // DB::table('divisions')->where('id', auth()->user()->user_details->divisi_id)->update([
@@ -141,6 +145,7 @@ class UserDetailsController extends Controller
         // ]);       
 
         auth()->user($users);
+        
         return redirect()->route('profile-profile')->with('success', 'Berhasil Edit Profile');
     }
 

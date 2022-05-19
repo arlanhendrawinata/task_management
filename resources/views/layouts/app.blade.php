@@ -8,7 +8,9 @@
     <title>Task Management | {{ ucwords(strtolower($title)) }} </title>
     <meta name="description" content="Some description for the page" />
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/images/favicon.png')}}">
-    {{-- <link href="{{ asset('public/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" type="text/css" /> --}}
+    {{--
+    <link href="{{ asset('public/vendor/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet"
+    type="text/css" /> --}}
     <link href="{{ asset('../../../cdn.lineicons.com/2.0/LineIcons.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/style(2).css')}}" rel="stylesheet" type="text/css" />
@@ -111,6 +113,7 @@
             padding: 0 !important;
         }
     }
+
 </style>
 
 <body>
@@ -135,7 +138,8 @@
         </div>
     </div>
     <script src="{{ asset('public/vendor/global/global.min.js')}}" type="text/javascript"></script>
-    {{-- <script src="{{ asset('public/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}" type="text/javascript"></script> --}}
+    {{-- <script src="{{ asset('public/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"
+    type="text/javascript"></script> --}}
     <script src="{{ asset('public/vendor/chart.js/Chart.bundle.min.js')}}" type="text/javascript"></script>
     <script src="{{ asset('public/vendor/apexchart/apexchart.js')}}" type="text/javascript"></script>
     <script src="{{ asset('public/js/dashboard/dashboard-1.js')}}" type="text/javascript"></script>
@@ -148,7 +152,9 @@
     <script src="{{ asset('public/js/lightbox.min.js')}}"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/js/tom-select.complete.min.js"></script>
@@ -159,36 +165,36 @@
         new TomSelect('.tom-select-client', {
             plugins: {
                 remove_button: {
-                    title: 'Remove this item',
-                }
-            },
-            sortField: {
-                field: "text",
-                direction: "asc"
+                    title: 'Remove this item'
+                , }
+            }
+            , sortField: {
+                field: "text"
+                , direction: "asc"
             }
         });
 
         new TomSelect('.tom-select-division', {
             plugins: {
                 remove_button: {
-                    title: 'Remove this item',
-                }
-            },
-            sortField: {
-                field: "text",
-                direction: "asc"
+                    title: 'Remove this item'
+                , }
+            }
+            , sortField: {
+                field: "text"
+                , direction: "asc"
             }
         });
 
         new TomSelect('.tom-select-status', {
             plugins: {
                 remove_button: {
-                    title: 'Remove this item',
-                }
-            },
-            sortField: {
-                field: "text",
-                direction: "asc"
+                    title: 'Remove this item'
+                , }
+            }
+            , sortField: {
+                field: "text"
+                , direction: "asc"
             }
         });
 
@@ -206,27 +212,31 @@
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+
     </script>
 
     {{-- Session ALL --}}
     @if(session()->has('success'))
     <script>
         toastr.success('{{ session("success") }}')
+
     </script>
     @endif
 
     @if(session()->has('errors'))
     <script>
         toastr.error('{{ session("errors") }}')
+
     </script>
     @endif
 
     {{-- lightbox View --}}
     <script>
         lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true
+            'resizeDuration': 200
+            , 'wrapAround': true
         })
+
     </script>
 
     {{-- Profile --}}
@@ -263,8 +273,8 @@
             event.preventDefault();
             let href = $(this).attr('data-attr');
             $.ajax({
-                url: href,
-                success: function(response) {
+                url: href
+                , success: function(response) {
                     console.log();
                     $('#detailModal').modal("show");
                     $('#detailBody').html('');
@@ -273,18 +283,43 @@
             })
         });
 
+        function checkOldPassword() {
+
+            let oldPassword = document.getElementById("oldPassword").value;
+            
+            if (oldPassword != "") {
+                document.getElementById('submit').disabled = true;
+                checkPassword();
+                
+            } else {
+                document.getElementById('submit').disabled = false;
+                document.getElementById('alertConfirmPassword-false').style.display = 'none';
+            }
+
+        }
+
         function checkPassword() {
+
 
             let passwordCP = document.getElementById("password").value;
             let confirmpasswordCP = document.getElementById("confirmPassword").value;
 
-            if (passwordCP != confirmpasswordCP) {
+           
+
+            if (passwordCP == "") {
+                document.getElementById('submit').disabled = true;
+                
+            }
+            else{
+                if (passwordCP != confirmpasswordCP) {
                 document.getElementById('alertConfirmPassword-false').style.display = 'block';
                 document.getElementById('alertConfirmPassword-true').style.display = 'none';
                 document.getElementById('submit').disabled = true;
                 console.log('tidak sama');
 
-            } else {
+                } 
+                
+                else if(passwordCP == confirmpasswordCP){
                 document.getElementById('alertConfirmPassword-false').style.display = 'none';
                 document.getElementById('alertConfirmPassword-true').style.display = 'block';
 
@@ -292,8 +327,42 @@
 
                 console.log('true');
                 return true;
+                }
+                
+                else if(confirmpasswordCP==""){
+                    document.getElementById('alertConfirmPassword-false').style.display = 'none';
+                    document.getElementById('submit').disabled = true;
+                }
+            }
+
+            
+
+            if (confirmpasswordCP == "" || passwordCP == "") {
+                document.getElementById('alertConfirmPassword-false').style.display = 'none';
+                document.getElementById('submit').disabled = true;
+            }
+
+            if (confirmpasswordCP == "" && passwordCP == "" && oldPassword == "") {
+                document.getElementById('alertConfirmPassword-false').style.display = 'none';
+                document.getElementById('submit').disabled = false;
+            }
+            if (confirmpasswordCP == "" && passwordCP != "") {
+                document.getElementById('alertConfirmPassword-false').style.display = 'none';
+                document.getElementById('submit').disabled = true;
             }
         }
+
+        const toggleOldPassword = document.querySelector("#toggleOldPassword");
+        const oldPassword = document.querySelector("#oldPassword");
+
+        toggleOldPassword.addEventListener("click", function() {
+            // toggle the type attribute
+            const type = oldPassword.getAttribute("type") === "password" ? "text" : "password";
+            oldPassword.setAttribute("type", type);
+
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
 
         const togglePassword = document.querySelector("#togglePassword");
         const password = document.querySelector("#password");
@@ -318,6 +387,7 @@
             // toggle the icon
             this.classList.toggle("bi-eye");
         });
+
     </script>
 
     {{-- Manajemen User --}}
@@ -343,8 +413,8 @@
             event.preventDefault();
             let href = $(this).attr('data-attr');
             $.ajax({
-                url: href,
-                success: function(response) {
+                url: href
+                , success: function(response) {
                     console.log();
                     $('#detailModal').modal("show");
                     $('#detailBody').html('');
@@ -357,8 +427,8 @@
             event.preventDefault();
             let href = $(this).attr('data-attr');
             $.ajax({
-                url: href,
-                success: function(response) {
+                url: href
+                , success: function(response) {
                     console.log();
                     $('#editcategory').modal("show");
                     $('#detailBodyEditCategory').html('');
@@ -368,6 +438,7 @@
         });
 
         //toggle password
+
     </script>
 
 </body>
