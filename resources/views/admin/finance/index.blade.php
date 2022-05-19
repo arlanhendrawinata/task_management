@@ -151,7 +151,7 @@
                     <div class="d-flex justify-content-center">
 
 
-                      <a href="" class="btn  btn-detail btn-success shadow btn-xs sharp mr-1" data-bs-toggle="tooltip" title="Click to see company client details" style="cursor: pointer;" data-bs-toggle="modal" data-attr="{{ route('admin-finance-edit', $item->id) }}" hidden><i class="fa fa-info"></i></a>
+                      <a href="" class="btn  btn-detail btn-success shadow btn-xs sharp mr-1" data-bs-toggle="tooltip" title="Click to edits finance" style="cursor: pointer;" data-bs-toggle="modal" data-attr="{{ route('admin-finance-edit', $item->id) }}" hidden><i class="fa fa-info"></i></a>
                       <!-- detail Modal -->
                       <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -173,7 +173,7 @@
                       {{-- <a href="/detailclient{{ $client->id }}" class="btn btn-success shadow btn-xs sharp mr-1"><i class="fa fa-info"></i></a> --}}
                       <a href="/finance/edit/{{ $item->id }}" class="btn btn-primary shadow btn-xs sharp mr-1" title="Click to edit company client"><i class="fa fa-pencil"></i></a>
 
-                      {{-- <a href="/client{{ $client->id }}" class="btn btn-danger shadow btn-xs sharp" onclick="return confirm('Yakin Hapus Data!?')"><i class="fa fa-trash"></i></a> --}}
+                      <a href="/finance/delete/{{ $item->id }}" class="btn btn-danger shadow btn-xs sharp" onclick="return confirm('Yakin Hapus Data!?')"><i class="fa fa-trash"></i></a>
                     </div>
                   </td>
                 </tr>

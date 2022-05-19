@@ -109,6 +109,7 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2']], function () {
     Route::put('/finance/{id}/{status}', [App\Http\Controllers\Admin\FinanceController::class, 'status'])->name('admin-finance-status');
     Route::get('/finance/edit/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'edit'])->name('admin-finance-edit');
     Route::put('/finance/update', [App\Http\Controllers\Admin\FinanceController::class, 'update'])->name('admin-finance-update');
+    Route::get('/finance/delete/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'destroy'])->name('admin-finance-delete');
 
     //LOGLOGIN
     Route::get('/loglogin', [\App\Http\Controllers\Admin\LoginLogsController::class, 'index'])->name('goto-show-loglogin');

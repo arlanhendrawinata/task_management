@@ -127,6 +127,7 @@ class FinanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $finance = Finance::find($id)->delete();
+        return redirect()->route('admin-finance-index')->with('success', 'Finance has been deleted');
     }
 }
