@@ -113,7 +113,6 @@
             padding: 0 !important;
         }
     }
-
 </style>
 
 <body>
@@ -162,43 +161,70 @@
     @yield('scriptjs')
 
     <script>
+        console.log('haha');
+        $(".js-search").select2({
+            ajax: {
+                url: "http://127.0.0.1:8000/search",
+                dataType: 'json',
+                data: (params) => {
+                    return {
+                        q: params.term,
+                    }
+                },
+                processResults: (data, params) => {
+                    const results = data.items.map(item => {
+                        return {
+                            id: item.id,
+                            text: item.full_name || item.name,
+                        };
+                    });
+                    return {
+                        results: results,
+                    }
+                },
+            },
+        });
+    </script>
+
+    <script>
         new TomSelect('.tom-select-client', {
             plugins: {
                 remove_button: {
-                    title: 'Remove this item'
-                , }
-            }
-            , sortField: {
-                field: "text"
-                , direction: "asc"
+                    title: 'Remove this item',
+                }
+            },
+            sortField: {
+                field: "text",
+                direction: "asc"
             }
         });
 
         new TomSelect('.tom-select-division', {
             plugins: {
                 remove_button: {
-                    title: 'Remove this item'
-                , }
-            }
-            , sortField: {
-                field: "text"
-                , direction: "asc"
+                    title: 'Remove this item',
+                }
+            },
+            sortField: {
+                field: "text",
+                direction: "asc"
             }
         });
 
         new TomSelect('.tom-select-status', {
             plugins: {
                 remove_button: {
-                    title: 'Remove this item'
-                , }
-            }
-            , sortField: {
-                field: "text"
-                , direction: "asc"
+                    title: 'Remove this item',
+                }
+            },
+            sortField: {
+                field: "text",
+                direction: "asc"
             }
         });
 
         $(document).ready(function() {
+
             $('.js-example-basic-single').select2();
 
             //auto refresh
@@ -207,36 +233,31 @@
             }, 600000);
         });
 
-
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
-
     </script>
 
     {{-- Session ALL --}}
     @if(session()->has('success'))
     <script>
         toastr.success('{{ session("success") }}')
-
     </script>
     @endif
 
     @if(session()->has('errors'))
     <script>
         toastr.error('{{ session("errors") }}')
-
     </script>
     @endif
 
     {{-- lightbox View --}}
     <script>
         lightbox.option({
-            'resizeDuration': 200
-            , 'wrapAround': true
+            'resizeDuration': 200,
+            'wrapAround': true
         })
-
     </script>
 
     {{-- Profile --}}
@@ -273,8 +294,8 @@
             event.preventDefault();
             let href = $(this).attr('data-attr');
             $.ajax({
-                url: href
-                , success: function(response) {
+                url: href,
+                success: function(response) {
                     console.log();
                     $('#detailModal').modal("show");
                     $('#detailBody').html('');
@@ -286,11 +307,11 @@
         function checkOldPassword() {
 
             let oldPassword = document.getElementById("oldPassword").value;
-            
+
             if (oldPassword != "") {
                 document.getElementById('submit').disabled = true;
                 checkPassword();
-                
+
             } else {
                 document.getElementById('submit').disabled = false;
                 document.getElementById('alertConfirmPassword-false').style.display = 'none';
@@ -304,38 +325,33 @@
             let passwordCP = document.getElementById("password").value;
             let confirmpasswordCP = document.getElementById("confirmPassword").value;
 
-           
+
 
             if (passwordCP == "") {
                 document.getElementById('submit').disabled = true;
-                
-            }
-            else{
+
+            } else {
                 if (passwordCP != confirmpasswordCP) {
-                document.getElementById('alertConfirmPassword-false').style.display = 'block';
-                document.getElementById('alertConfirmPassword-true').style.display = 'none';
-                document.getElementById('submit').disabled = true;
-                console.log('tidak sama');
+                    document.getElementById('alertConfirmPassword-false').style.display = 'block';
+                    document.getElementById('alertConfirmPassword-true').style.display = 'none';
+                    document.getElementById('submit').disabled = true;
+                    console.log('tidak sama');
 
-                } 
-                
-                else if(passwordCP == confirmpasswordCP){
-                document.getElementById('alertConfirmPassword-false').style.display = 'none';
-                document.getElementById('alertConfirmPassword-true').style.display = 'block';
+                } else if (passwordCP == confirmpasswordCP) {
+                    document.getElementById('alertConfirmPassword-false').style.display = 'none';
+                    document.getElementById('alertConfirmPassword-true').style.display = 'block';
 
-                document.getElementById('submit').disabled = false;
+                    document.getElementById('submit').disabled = false;
 
-                console.log('true');
-                return true;
-                }
-                
-                else if(confirmpasswordCP==""){
+                    console.log('true');
+                    return true;
+                } else if (confirmpasswordCP == "") {
                     document.getElementById('alertConfirmPassword-false').style.display = 'none';
                     document.getElementById('submit').disabled = true;
                 }
             }
 
-            
+
 
             if (confirmpasswordCP == "" || passwordCP == "") {
                 document.getElementById('alertConfirmPassword-false').style.display = 'none';
@@ -387,7 +403,6 @@
             // toggle the icon
             this.classList.toggle("bi-eye");
         });
-
     </script>
 
     {{-- Manajemen User --}}
@@ -413,8 +428,8 @@
             event.preventDefault();
             let href = $(this).attr('data-attr');
             $.ajax({
-                url: href
-                , success: function(response) {
+                url: href,
+                success: function(response) {
                     console.log();
                     $('#detailModal').modal("show");
                     $('#detailBody').html('');
@@ -427,8 +442,8 @@
             event.preventDefault();
             let href = $(this).attr('data-attr');
             $.ajax({
-                url: href
-                , success: function(response) {
+                url: href,
+                success: function(response) {
                     console.log();
                     $('#editcategory').modal("show");
                     $('#detailBodyEditCategory').html('');
@@ -438,7 +453,6 @@
         });
 
         //toggle password
-
     </script>
 
 </body>

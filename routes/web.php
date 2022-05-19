@@ -190,6 +190,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('taskManagement/profile/edit', [App\Http\Controllers\UserDetailsController::class, "edit"])->name('profile-edit');
     Route::put('taskManagement/profile', [App\Http\Controllers\UserDetailsController::class, "update"])->name('profile-update');
 
+    Route::get('search', [App\Http\Controllers\GlobalSearchController::class, "search"])->name('global-search');
+
+
     //NOTES
     Route::get('notes', [App\Http\Controllers\Admin\NoteController::class, 'index'])->name('notes-index');
 
