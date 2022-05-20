@@ -161,28 +161,66 @@
     @yield('scriptjs')
 
     <script>
-        console.log('haha');
-        $(".js-search").select2({
-            ajax: {
-                url: "http://127.0.0.1:8000/search",
-                dataType: 'json',
-                data: (params) => {
-                    return {
-                        q: params.term,
-                    }
-                },
-                processResults: (data, params) => {
-                    const results = data.items.map(item => {
+        $(document).ready(function() {
+            $("select.select2").select2({
+                ajax: {
+                    url: "https://api.github.com/search/repositories",
+                    dataType: 'json',
+                    data: (params) => {
                         return {
-                            id: item.id,
-                            text: item.full_name || item.name,
-                        };
-                    });
-                    return {
-                        results: results,
-                    }
+                            q: params.term,
+                        }
+                    },
+                    processResults: (data, params) => {
+                        console.log(data);
+                        const results = data.items.map(item => {
+                            return {
+                                id: item.id,
+                                text: item.full_name || item.name,
+                            };
+                        });
+                        console.log(results);
+                        return {
+                            results: results,
+                        }
+                    },
                 },
-            },
+            });
+
+            $(".js-search").select2({
+                // templateResult: formatProduct,
+                placeholder: "Search anything",
+                minimumInputLength: 3,
+                delay: 500,
+                ajax: {
+                    url: "{{ route('global-search') }}",
+                    dataType: 'json',
+                    data: (params) => {
+                        return {
+                            q: params.term,
+                        }
+                    },
+                    processResults: function(data, key) {
+                        return {
+                            results: data
+                        };
+                    },
+                },
+            });
+            $('.js-search').change(function() {
+                var selectedData = $('.js-search').select2('data')[0];
+                var selectedDataId = selectedData.id;
+                // console.log(selectedData);
+                // if (selectedData.type == "Projects") {
+                //     window.location.href = "http://127.0.0.1:8000/task/single/" + selectedDataId
+                // }
+                // if (selectedData.type == "Users") {
+                //     window.location.href = "http://127.0.0.1:8000/admin/detailuser" + selectedDataId
+                // }
+
+                // console.log(selectedData);
+                // console.log($(this).find(':selected').parent());
+            })
         });
     </script>
 

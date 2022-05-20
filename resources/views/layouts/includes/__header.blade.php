@@ -23,11 +23,8 @@
                 <div class="header-left">
                     <div class="dashboard_bar"> {{ ucwords(strtolower($title)) }} </div>
                 </div>
-                <div class="input-group search-area mr-2 ml-2 d-inline-flex">
-                    <input type="text" class="js-search" placeholder="Search here">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="flaticon-381-search-2"></i></span>
-                    </div>
+                <div class=" mr-2 ml-2 d-inline-flex">
+                    <select class="js-search"></select>
                 </div>
                 <ul class="navbar-nav header-right">
                     <li class="nav-item dropdown notification_dropdown">
