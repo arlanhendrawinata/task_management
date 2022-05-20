@@ -23,6 +23,9 @@
                 <div class="header-left">
                     <div class="dashboard_bar"> {{ ucwords(strtolower($title)) }} </div>
                 </div>
+                <div class=" mr-2 ml-2 d-inline-flex">
+                    <select class="js-search"></select>
+                </div>
                 <ul class="navbar-nav header-right">
                     <li class="nav-item dropdown notification_dropdown">
                         <a class="nav-link  ai-icon" href="javascript:;" role="button" data-toggle="dropdown">
