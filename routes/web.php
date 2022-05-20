@@ -106,6 +106,7 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2']], function () {
     Route::get('/finance', [App\Http\Controllers\Admin\FinanceController::class, 'index'])->name('admin-finance-index');
     Route::get('/finance/create', [App\Http\Controllers\Admin\FinanceController::class, 'create'])->name('admin-finance-create');
     Route::post('/finance/store', [App\Http\Controllers\Admin\FinanceController::class, 'store'])->name('admin-finance-store');
+    Route::get('/finance/detailfinance{id}', [App\Http\Controllers\Admin\FinanceController::class, 'show'])->name('admin-finance-detailfinance');
     Route::put('/finance/{id}/{status}', [App\Http\Controllers\Admin\FinanceController::class, 'status'])->name('admin-finance-status');
     Route::get('/finance/edit/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'edit'])->name('admin-finance-edit');
     Route::put('/finance/update', [App\Http\Controllers\Admin\FinanceController::class, 'update'])->name('admin-finance-update');

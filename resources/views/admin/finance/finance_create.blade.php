@@ -41,7 +41,7 @@
               </label>
               <div class="col-lg-6">
                 <img class="img-preview">
-                <input type="file" class="form-control" id="foto" name="foto" placeholder="Insert Foto" onchange="previewImageUsersCRUD()">
+                <input type="file" class="form-control" id="foto" name="img" placeholder="Insert Foto" onchange="previewImageUsersCRUD()">
               </div>
             </div>
           </div>

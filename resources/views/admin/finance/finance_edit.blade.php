@@ -45,8 +45,16 @@
                 <!--<span class="text-danger">*</span>-->
               </label>
               <div class="col-lg-6">
-                <img class="img-preview">
-                <input type="file" class="form-control" id="foto" name="foto" placeholder="Insert Foto" onchange="previewImageUsersCRUD()">
+                <input type="hidden" name="oldlogo" value="{{ $finance->img }}">
+                @if ($finance->img)
+                <img src="{{ asset($finance->img) }}" class="img-preview img-fluid mb-3 col-sm-5">
+
+                @else
+                <img class="img-preview img-fluid mb-3 col-sm-5">
+
+                @endif
+
+                <input type="file" class="form-control" id="img" name="img" onchange="previewImage()">
               </div>
             </div>
           </div>

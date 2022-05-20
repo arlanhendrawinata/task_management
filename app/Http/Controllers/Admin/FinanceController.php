@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Finance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Infotech\ImgBB\ImgBB;
 
 class FinanceController extends Controller
 {
@@ -46,13 +48,19 @@ class FinanceController extends Controller
         $data = array(
             'name' => ucwords($request->name),
             'detail' => ucfirst($request->detail),
-            'img' => $request->foto,
             'value' => $request->value,
             'type' => ucwords($request->type),
             'offices_id' => $request->offices_id,
             'users_id' => Auth::id(),
             'status' => 1,
+            'img' => '',
         );
+
+        if ($request->file('img')) {
+            $namaasli = $request->file('img')->getClientOriginalName();
+            $image = ImgBB::image($request->file('img'), $namaasli);
+            $data['img'] =  $image["data"]["url"];
+        }
         Finance::create($data);
         return redirect()->route('admin-finance-index')->with('success', 'New finance has been stored');
     }
@@ -65,7 +73,8 @@ class FinanceController extends Controller
      */
     public function show($id)
     {
-        //
+        $finance = Finance::where('id', $id)->first();
+        return view('admin.finance.finance_detail', compact('finance'));
     }
 
     /**
@@ -94,13 +103,17 @@ class FinanceController extends Controller
         $data = array(
             'name' => ucwords($request->name),
             'detail' => ucfirst($request->detail),
-            'img' => $request->foto,
             'value' => $request->value,
             'type' => ucwords($request->type),
             'offices_id' => $request->offices_id,
             'users_id' => Auth::id(),
             'status' => 1,
         );
+        if ($request->file('img')) {
+            $namaasli = $request->file('img')->getClientOriginalName();
+            $image = ImgBB::image($request->file('img'), $namaasli);
+            $data['img'] =  $image["data"]["url"];
+        }
         $finance->update($data);
         return redirect()->route('admin-finance-index')->with('success', 'New finance has been updated');
     }
