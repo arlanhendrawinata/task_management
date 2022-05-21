@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\EmailController;
 
 use App\Models\Company;
 use App\Models\Division;
@@ -66,13 +66,16 @@ class UserController extends Controller
 
         $title = "User";
         $passEncrypt = Hash::make($request->password);
-        $status = 1;
+        $status = 0;
 
         $roleTeamLeader = 3;
         $roleAdmin = 1;
         $roleManajemen = 2;
         $roleAnggota = 4;
         $divisiManajemen = 1;
+
+        $objEmail = new EmailController;
+
 
         if ($request->id_divisi == 1 && $request->role > 2) {
             return redirect()->route('goto-showinsert-dbusers')->with('errors', 'Roles are not allowed to be part of Management');
@@ -121,7 +124,10 @@ class UserController extends Controller
                 if ($this->checkTeamLeader($request->id_divisi) == true) {
                     // dd("this->checkTeamLeader(request->id_divisi) == true");
                     $user = User::create($array);
-                    auth()->user($user);
+
+                    if (auth()->user($user)) {
+                        $objEmail->notif();
+                    }
 
                     $id = User::orderBy('id', 'desc')->first();
 
@@ -141,7 +147,11 @@ class UserController extends Controller
             } else {
 
                 $user = User::create($array);
-                auth()->user($user);
+                if (auth()->user($user)) {
+                    $objEmail->notif();
+                }
+
+
                 $id = User::orderBy('id', 'desc')->first();
                 $data['user_id'] = $id->id;
 

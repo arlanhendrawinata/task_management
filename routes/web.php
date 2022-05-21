@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EmailController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -200,3 +202,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('notes', [App\Http\Controllers\Admin\NoteController::class, 'update'])->name('notes-update');
     Route::get('notes/{id}/delete', [App\Http\Controllers\Admin\NoteController::class, 'destroy'])->name('notes-delete');
 });
+
+// Route::get('/email', [EmailController::class, 'kirim']);
+// Route::get('/attach', [EmailController::class, 'attach']);
+
+// Route::get('/pesan', [EmailController::class, 'notif']);
+
+// Auth::routes(['verify' => true]);
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
+
+Route::get('go-verify/{id}', [App\Http\Controllers\EmailController::class, 'goVerify'])->name('go-verify');
+Route::get('dd', [App\Http\Controllers\EmailController::class, 'notif'])->name('ppp');
