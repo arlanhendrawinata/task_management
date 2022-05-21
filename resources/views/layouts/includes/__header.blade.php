@@ -19,11 +19,11 @@
 <div class="header">
     <div class="header-content">
         <nav class="navbar navbar-expand">
-            <div class="collapse navbar-collapse justify-content-between">
+            <div class="collapse navbar-collapse">
                 <div class="header-left">
                     <div class="dashboard_bar"> {{ ucwords(strtolower($title)) }} </div>
                 </div>
-                <div class=" mr-2 ml-2 d-inline-flex">
+                <div class="search-container">
                     <select class="js-search"></select>
                 </div>
                 <ul class="navbar-nav header-right">

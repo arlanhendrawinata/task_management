@@ -113,6 +113,38 @@
             padding: 0 !important;
         }
     }
+
+    .search-container {
+        width: 100%;
+        margin: 0 100px;
+    }
+
+    .select2-container--default .select2-selection--single {
+        width: 100% !important;
+    }
+
+    .search-type,
+    .search-prioritas,
+    .search-status {
+        width: 200px;
+    }
+
+    @media (max-width: 576px) {
+        .search-container {
+            width: 130px;
+            margin: 0 10px;
+        }
+
+        .navbar-collapse {
+            justify-content: none !important;
+        }
+
+        .search-type,
+        .search-prioritas,
+        .search-status {
+            width: 200px;
+        }
+    }
 </style>
 
 <body>
