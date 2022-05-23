@@ -164,7 +164,6 @@
         border: 1px solid #d7dae3;
         border-radius: 0.75rem;
     }
-
 </style>
 
 <div class="container-fluid">
@@ -611,7 +610,7 @@
 
 
 <!-- Filter Modal -->
-<form action="{{ route('dash-filter-task') }}" method="get">
+<form action="{{ route('admin-search') }}" method="get">
     <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -644,6 +643,24 @@
                                         <option value="">Please select client</option>
                                         @forelse($clients as $client)
                                         <option value="{{ $client->id }}">{{ $client->nama_client }}</option>
+                                        @empty
+                                        <option value="">No Datas</option>
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-division mt-5">
+                            <h5 class="border-bottom mb-3 pb-3">By team</h5>
+                            <div class="d-flex align-items-center">
+                                <label class="col-form-label" for="val-division">Team :
+                                </label>
+                                <div class="col-lg-6">
+                                    <select class="tom-select-division" id="val-divisions" name="division">
+                                        <option value="">Please select team</option>
+                                        @forelse($divisions as $division)
+                                        <option value="{{ $division->id }}">{{ $division->nama_divisi }}
+                                        </option>
                                         @empty
                                         <option value="">No Datas</option>
                                         @endforelse
@@ -685,7 +702,6 @@
         let url = "/dashboard/search/divisi_id/" + selectVal;
         window.location.href = url;
     });
-
 </script>
 <script>
     $(document).on('click', '.btn-addpic', function(event) {
@@ -695,15 +711,14 @@
         $('#detailModal').modal('hide');
         $('#tambahPICModal').modal('show');
         $.ajax({
-            type: "GET"
-            , url: url
-            , success: function(response) {
+            type: "GET",
+            url: url,
+            success: function(response) {
                 $('.picModalForm').html('');
                 $('.picModalForm').html(response);
             }
         });
     });
-
 </script>
 @endsection
 

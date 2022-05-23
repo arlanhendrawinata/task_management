@@ -162,51 +162,148 @@ class DashboardController extends Controller
         $toDate = $request->to_date;
 
 
-        if ($request->input('status') != null) {
-            $projects = Project::with('companies', 'clients', 'divisions', 'users')
-                ->where("status", $request->status)
-                ->orderBy('id', 'desc');
-            $projects = $projects->paginate(10)->appends([
-                'status' => $request->status,
-            ]);
-        } elseif ($request->input('from_date') != null && $request->input('to_date') == null) {
+        if ($request->input('from_date') != NULL && $request->input('to_date') == NULL && $request->input('client') == NULL && $request->input('division') == NULL) {
+            // return 'from';
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $fromDate)
-                ->orderBy('client_id', 'asc');
+                ->orderBy('status', 'asc');
             $projects = $projects->paginate(10)->appends([
                 'from_date' => $fromDate,
             ]);
-        } elseif ($request->input('to_date') != null && $request->input('from_date') == null) {
+        } elseif ($request->input('to_date') != NULL && $request->input('from_date') == NULL && $request->input('client') == NULL && $request->input('division') == NULL) {
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $toDate)
-                ->orderBy('client_id', 'asc');
+                ->orderBy('status', 'asc');
             $projects = $projects->paginate(10)->appends([
                 'to_date' => $toDate,
             ]);
-        } elseif ($request->input('client') != null) {
+        } elseif ($request->input('client') != NULL && $request->input('to_date') == NULL && $request->input('from_date') == NULL && $request->input('division') == NULL) {
+            // return 'client';
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("client_id", $request->client)
-                ->orderBy('status', 'asc')
-                ->orderBy('id', 'desc');
+                ->orderBy('status', 'asc');
             $projects = $projects->paginate(10)->appends([
                 'client' => $request->client,
             ]);
-        } elseif ($request->input('division') != null) {
+        } elseif ($request->input('division') != NULL && $request->input('to_date') == NULL && $request->input('from_date') == NULL && $request->input('client') == NULL) {
+            // return 'division';
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("divisi_id", $request->division)
-                ->orderBy('status', 'asc')
-                ->orderBy('id', 'desc');
+                ->orderBy('status', 'asc');
             $projects = $projects->paginate(10)->appends([
                 'division' => $request->division,
             ]);
-        } elseif ($request->input('from_date') && $request->input('to_date') != null) {
+        } elseif ($request->input('from_date') != NULL && $request->input('client') != NULL && $request->input('to_date') == NULL && $request->input('division') == NULL) {
+            // return 'from, client';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", $fromDate)
+                ->where("client_id", $request->client)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'from_date' => $fromDate,
+                'client' => $request->client,
+            ]);
+        } elseif ($request->input('from_date') != NULL && $request->input('division') != NULL && $request->input('to_date') == NULL && $request->input('client') == NULL) {
+            // return 'from, divisi';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", $fromDate)
+                ->where("divisi_id", $request->division)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'from_date' => $fromDate,
+                'division' => $request->division,
+            ]);
+        } elseif ($request->input('to_date') != NULL && $request->input('client') != NULL && $request->input('from_date') == NULL && $request->input('division') == NULL) {
+            // return 'to, client';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", $toDate)
+                ->where("client_id", $request->client)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'to_date' => $toDate,
+                'client' => $request->client,
+            ]);
+        } elseif ($request->input('to_date') != NULL && $request->input('division') != NULL && $request->input('from_date') == NULL && $request->input('client') == NULL) {
+            // return 'to, divisi';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", $toDate)
+                ->where("divisi_id", $request->division)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'to_date' => $toDate,
+                'division' => $request->division,
+            ]);
+        } elseif ($request->input('from_date') != NULL && $request->input('to_date') != NULL && $request->input('client') == NULL && $request->input('division') == NULL) {
+            // return 'from, to';
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", ">=", $fromDate)
                 ->where("tgl_input", "<=", $toDate)
-                ->orderBy('client_id', 'asc');
+                ->orderBy('status', 'asc');
             $projects = $projects->paginate(10)->appends([
                 'from_date' => $fromDate,
                 'to_date' => $toDate,
+            ]);
+        } elseif ($request->input('from_date') != NULL && $request->input('to_date') != NULL && $request->input('division') != NULL && $request->input('client') == NULL) {
+            // return 'divisi, from, to';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", ">=", $fromDate)
+                ->where("tgl_input", "<=", $toDate)
+                ->where("divisi_id", $request->division)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'from_date' => $fromDate,
+                'to_date' => $toDate,
+                'divisi' => $request->division,
+            ]);
+        } elseif ($request->input('from_date') != NULL && $request->input('to_date') != NULL && $request->input('client') != NULL && $request->input('division') == NULL) {
+            // return 'client, from, to';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", ">=", $fromDate)
+                ->where("tgl_input", "<=", $toDate)
+                ->where("client_id", $request->client)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'from_date' => $fromDate,
+                'to_date' => $toDate,
+                'client' => $request->client,
+            ]);
+        } elseif ($request->input('from_date') != NULL && $request->input('client') != NULL && $request->input('division') != NULL && $request->input('to_date') == NULL) {
+            // return 'from, client, divisi';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", ">=", $fromDate)
+                ->where("client_id", $request->client)
+                ->where("divisi_id", $request->division)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'from_date' => $fromDate,
+                'client' => $request->client,
+                'division' => $request->division,
+            ]);
+        } elseif ($request->input('to_date') != NULL && $request->input('client') != NULL && $request->input('division') != NULL && $request->input('from_date') == NULL) {
+            // return 'to, client, divisi';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", ">=", $toDate)
+                ->where("client_id", $request->client)
+                ->where("divisi_id", $request->division)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'to_date' => $toDate,
+                'client' => $request->client,
+                'division' => $request->division,
+            ]);
+        } elseif ($request->input('from_date') != NULL && $request->input('to_date') != NULL && $request->input('client') != NULL && $request->input('division') != NULL) {
+            // return 'client, divisi, from, to';
+            $projects = Project::with('companies', 'clients', 'divisions', 'users')
+                ->where("tgl_input", ">=", $fromDate)
+                ->where("tgl_input", "<=", $toDate)
+                ->where("client_id", $request->client)
+                ->where("divisi_id", $request->division)
+                ->orderBy('status', 'asc');
+            $projects = $projects->paginate(10)->appends([
+                'from_date' => $fromDate,
+                'to_date' => $toDate,
+                'client' => $request->client,
+                'division' => $request->division,
             ]);
         } else {
             return redirect()->back()->with('errors', 'Please fill out the form!');
@@ -216,6 +313,8 @@ class DashboardController extends Controller
         $divisions = Division::all();
         $pics = Pic::with('projects', 'users')->get();
         $title = 'Task';
+        $name = "";
+        $val = "";
         $users = User::all();
         $currentUrl = "search";
         $tableTitle = "Filter Task";
@@ -227,7 +326,7 @@ class DashboardController extends Controller
         $countSuccess = Project::whereIn('status', [5])->whereIn('type', ['Single', 'Group'])->count();
         $countCancle = Project::whereIn('status', [6, 7])->whereIn('type', ['Single', 'Group'])->count();
 
-        return view('admin.dashboard', compact('divisions', 'currentUrl', 'tableTitle', 'projects', 'users', 'clients', 'pics', 'title',  'countActive', 'countSubmit', 'countProcess', 'countVerif', 'countSuccess', 'countCancle'));
+        return view('admin.dashboard', compact('val', 'divisions', 'currentUrl', 'tableTitle', 'projects', 'users', 'clients', 'pics', 'title',  'countActive', 'countSubmit', 'countProcess', 'countVerif', 'countSuccess', 'countCancle', 'name'));
     }
 
     public function selectSearch($name, $val)
@@ -255,6 +354,7 @@ class DashboardController extends Controller
         $clients = Client::all();
         $users = User::all();
         $currentUrl = "search";
+        $name = "";
         $divisions = Division::all();
 
         return view('admin.dashboard', compact('name', 'val', 'divisions', 'users', 'currentUrl', 'clients', 'projects', 'pics', 'title', 'countActive', 'countProcess', 'countSubmit', 'countVerif', 'countSuccess', 'countCancle', 'tableTitle'));
