@@ -83,7 +83,6 @@
     .alignLeft {
         text-align: left !important;
     }
-
 </style>
 <div class="container-fluid">
 
@@ -124,27 +123,27 @@
                                     <td style="width: 10%;">
                                         <a><strong><span class="status">
                                                     <?php
-                                                if($item->status == 1){
-                                            ?>
-                                                    <form action="{{ route('company-client-status', ['id'=>$item->id,'status'=>0]) }}" method="POST">
-                                                        @csrf
-                                                        @method('put')
-                                                        <button type="submit" value="0" class="btn infostatus" name="active">Active</button>
-                                                    </form>
+                                                    if ($item->status == 1) {
+                                                    ?>
+                                                        <form action="{{ route('company-client-status', ['id'=>$item->id,'status'=>0]) }}" method="POST">
+                                                            @csrf
+                                                            @method('put')
+                                                            <button type="submit" value="0" class="btn infostatus" name="active">Active</button>
+                                                        </form>
                                                     <?php
-                                                }
-                                            ?>
+                                                    }
+                                                    ?>
                                                     <?php
-                                                if($item->status == 0){
-                                            ?>
-                                                    <form action="{{  route('company-client-status', ['id'=>$item->id,'status'=>1]) }}" method="POST">
-                                                        @csrf
-                                                        @method('put')
-                                                        <button type="submit" value="1" class="btn inactive" name="inactive">In Active</button>
-                                                    </form>
+                                                    if ($item->status == 0) {
+                                                    ?>
+                                                        <form action="{{  route('company-client-status', ['id'=>$item->id,'status'=>1]) }}" method="POST">
+                                                            @csrf
+                                                            @method('put')
+                                                            <button type="submit" value="1" class="btn inactive" name="inactive">In Active</button>
+                                                        </form>
                                                     <?php
-                                            }
-                                            ?>
+                                                    }
+                                                    ?>
                                                 </span></strong></a>
                                     </td>
                                     <td>

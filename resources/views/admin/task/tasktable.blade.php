@@ -7,6 +7,41 @@
 @section('active_task', 'mm-active')
 
 <style>
+    .table-container {
+        padding: 20px;
+    }
+
+    .divisiTable .th-date {
+        width: 10px !important;
+    }
+
+    .divisiTable th {
+        font-size: 11px !important;
+        width: 10px !important;
+        padding: 10px 5px !important;
+        text-align: center;
+
+    }
+
+    .divisiTable .th-date {
+        padding: 10px 3px !important;
+        width: 100px;
+
+    }
+
+    .divisiTable td {
+        padding: 10px 4px !important;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .divisiTable .th-target,
+    .divisiTable .th-result {
+        width: 5px !important;
+        padding: 10px 6px !important;
+
+    }
+
     .tasktable .th-date {
         width: 10px !important;
     }
@@ -243,8 +278,8 @@
                 </div>
                 <div class=" card-body">
                     <!-- task table -->
-                    <div class="table-bordered table-responsive">
-                        <table class="tasktable table table-striped">
+                    <div class="table-bordered table-responsive table-container">
+                        <table id="example" class="divisiTable table table-striped">
                             <thead>
                                 <tr class="tre">
                                     <th>No</th>
@@ -267,7 +302,7 @@
                             <tbody>
                                 @forelse($projects as $no=>$item)
                                     <tr>
-                                        <td style="width: 3%;">{{ $no + $projects->firstItem() }}</td>
+                                        <td style="width: 3%;">{{ $no + 1 }}</td>
                                         <td class="td-left" style="width: 8%;">
                                             {{ $item->clients->companyclients->name }}
                                         <td class="td-left" style="width: 8%;">
@@ -395,9 +430,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        <div class="mx-4 mt-4">
-                            {{ $projects->links() }}
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -543,8 +576,8 @@
                         class="fa fa-close"></i></button>
             </div>
             <div class="modal-body">
-                <div class="table-bordered table-responsive">
-                    <table class="tasktable table table-striped">
+                <div class="table-bordered table-responsive table-container">
+                    <table id="example2" class="divisiTable table table-striped">
                         <thead>
                             <tr class="tre">
                                 <th>No</th>
@@ -584,7 +617,7 @@
                         <tbody>
                             @forelse($projects as $no=>$item)
                                 <tr>
-                                    <td style="width: 3%;">{{ $no + $projects->firstItem() }}</td>
+                                    <td style="width: 3%;">{{ $no + 1 }}</td>
                                     <td class="td-left" style="width: 8%;">
                                         {{ $item->clients->companyclients->name }}
                                     <td class="td-left" style="width: 8%;">{{ $item->clients->nama_client }}
@@ -792,9 +825,7 @@
                     </table>
                 </div>
             </div>
-            <div class="mx-5">
-                {{ $projects->links() }}
-            </div>
+
         </div>
     </div>
 </div>
@@ -876,7 +907,12 @@
             let url = "/task/search/divisi_id/" + selectVal;
             window.location.href = url;
         });
+        $(document).ready(function() {
+            $('.sorting').css('background-image', 'none');
+            $('.sorting_asc').css('background-image', 'none');
+        })
     </script>
+
 @endsection
 
 

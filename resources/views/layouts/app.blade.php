@@ -145,6 +145,16 @@
             width: 200px;
         }
     }
+
+    select option {
+        background-color: #ffff !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        color: white !important;
+        background-color: #0e185f !important;
+    }
 </style>
 
 <body>

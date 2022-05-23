@@ -133,7 +133,8 @@
                     <div>
                         <h4 class="card-title">{{ $tableTitle }}</h4>
                     </div>
-                    <a href="" class="btn btn-primary btn-sm" data-bs-target="#insertModal" data-bs-toggle="modal"><i class="fa fa-plus-circle "></i> Add Team</a>
+                    <a href="" class="btn btn-primary btn-sm" data-bs-target="#insertModal" data-bs-toggle="modal"><i
+                            class="fa fa-plus-circle "></i> Add Team</a>
                     {{-- <h4 class="card-title">Profile Datatable</h4> --}}
                 </div>
                 <div class="card-body">
@@ -150,41 +151,53 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($array as $no=>$data)
-
-                                <tr>
-                                    <td style="width: 3%;">{{ $no+1 }}</td>
-                                    <td class="alignLeft">{{ $data->nama_divisi }}</td>
-                                    <td class="alignLeft">{{ $data->keterangan }}</td>
-                                    <td style="width: 10%;"><a href="" class="btn-detail btn-task" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#detailModal{{ $data->id }}" data-attr="{{ route('goto-myisiteam', $data->id) }}">
-                                            {{ countMemberTeam($data->id) }}
-                                        </a></td>
-                                    <td><a>
-                                            <?php if($data->status == 1){ ?>
-                                            <form action="{{  route('goto-updatestatus-dbvisions',['id'=>$data->id,'status'=>0])}}" method="POST">
-                                                @csrf
-                                                @method('put')
-                                                <input type="text" name="id" value="{{ $data->id }}" hidden>
-                                                <button type="submit" class="btn infostatus" name="active" value="0" type="submit">Active</button>
-                                            </form>
-                                            <?php } if($data->status == 0){ ?>
-                                            <form action="{{  route('goto-updatestatus-dbvisions',['id'=>$data->id,'status'=>1])}}" method="POST">
-                                                @csrf
-                                                @method('put')
-                                                <input type="text" name="id" value="{{ $data->id }}" hidden>
-                                                <button type="submit" class="btn inactive" name="inactive" value="1" type="submit">Inactive</button>
-                                            </form>
-                                            <?php } ?>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            {{-- <a href="" class="btn btn-detail btn-success shadow btn-xs sharp mr-1" data-bs-toggle="tooltip" title="Klik untuk lihat detail project" style="cursor: pointer;" data-bs-toggle="modal" data-attr="{{ route('goto-detail-dbdivisions',   $data->id)}}"><i class="fa fa-info"></i></a> --}}
-                                            <a href="" class="btn btn-detail btn-primary shadow btn-xs sharp mr-1" data-bs-toggle="tooltip" title="Click to see team details" style="cursor: pointer;" data-bs-toggle="modal" data-attr="{{ route('goto-edit-dbdivisions',   $data->id)}}"><i class="fa fa-pencil"></i></a>
-                                            {{-- <a href="{{ route('goto-delete-dbdivisions',['id'=>$data->id])}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a> --}}
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach ($array as $no => $data)
+                                    <tr>
+                                        <td style="width: 3%;">{{ $no + 1 }}</td>
+                                        <td class="alignLeft">{{ $data->nama_divisi }}</td>
+                                        <td class="alignLeft">{{ $data->keterangan }}</td>
+                                        <td style="width: 10%;"><a href="" class="btn-detail btn-task"
+                                                style="cursor: pointer;" data-bs-toggle="modal"
+                                                data-bs-target="#detailModal{{ $data->id }}"
+                                                data-attr="{{ route('goto-myisiteam', $data->id) }}">
+                                                {{ countMemberTeam($data->id) }}
+                                            </a></td>
+                                        <td><a>
+                                                <?php if($data->status == 1){ ?>
+                                                <form
+                                                    action="{{ route('goto-updatestatus-dbvisions', ['id' => $data->id, 'status' => 0]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('put')
+                                                    <input type="text" name="id" value="{{ $data->id }}" hidden>
+                                                    <button type="submit" class="btn infostatus" name="active" value="0"
+                                                        type="submit">Active</button>
+                                                </form>
+                                                <?php } if($data->status == 0){ ?>
+                                                <form
+                                                    action="{{ route('goto-updatestatus-dbvisions', ['id' => $data->id, 'status' => 1]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('put')
+                                                    <input type="text" name="id" value="{{ $data->id }}" hidden>
+                                                    <button type="submit" class="btn inactive" name="inactive"
+                                                        value="1" type="submit">Inactive</button>
+                                                </form>
+                                                <?php } ?>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                {{-- <a href="" class="btn btn-detail btn-success shadow btn-xs sharp mr-1" data-bs-toggle="tooltip" title="Klik untuk lihat detail project" style="cursor: pointer;" data-bs-toggle="modal" data-attr="{{ route('goto-detail-dbdivisions',   $data->id)}}"><i class="fa fa-info"></i></a> --}}
+                                                <a href="" class="btn btn-detail btn-primary shadow btn-xs sharp mr-1"
+                                                    data-bs-toggle="tooltip" title="Click to see team details"
+                                                    style="cursor: pointer;" data-bs-toggle="modal"
+                                                    data-attr="{{ route('goto-edit-dbdivisions', $data->id) }}"><i
+                                                        class="fa fa-pencil"></i></a>
+                                                {{-- <a href="{{ route('goto-delete-dbdivisions',['id'=>$data->id])}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a> --}}
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -201,7 +214,8 @@
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center">
                 <h5 class="modal-title" id="exampleModalLabel">Detail Team Members</h5>
-                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa fa-close"></i></button>
             </div>
             <div class="modal-body" id="detailBody">
 
@@ -217,7 +231,8 @@
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center">
                 <h5 class="modal-title" id="exampleModalLabel">Add Team</h5>
-                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa fa-close"></i></button>
             </div>
             <div class="modal-body" id="detailBody">
                 <div class="text-center">
@@ -230,22 +245,27 @@
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="nama-divisi">Nama Team <span class="text-danger">*</span>
+                                        <label class="col-lg-4 col-form-label" for="nama-divisi">Nama Team <span
+                                                class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="nama-divisi" name="nama_divisi" placeholder="Enter Team Name" required>
+                                            <input type="text" class="form-control" id="nama-divisi"
+                                                name="nama_divisi" placeholder="Enter Team Name" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="keterangan-divisi">Description Team <span class="text-danger">*</span>
+                                        <label class="col-lg-4 col-form-label" for="keterangan-divisi">Description Team
+                                            <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <textarea type="text" class="form-control" id="keterangan-divisi" name="keterangan" placeholder="Enter Team Description" required></textarea>
+                                            <textarea type="text" class="form-control" id="keterangan-divisi" name="keterangan"
+                                                placeholder="Enter Team Description" required></textarea>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">Insert</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>

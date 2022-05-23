@@ -40,8 +40,7 @@ class ProjectController extends Controller
             ->whereIn('type', ['Single', 'Group'])
             // ->where("tgl_input", "<=", $dateNowTo)
             ->orderBy('status', 'asc')
-            ->orderBy('id', 'desc');
-        $projects = $projects->paginate(10);
+            ->orderBy('id', 'desc')->get();
         $pics = Pic::with('projects')->get();
         $currentUrl = "index";
         $title = 'Task';
@@ -273,10 +272,10 @@ class ProjectController extends Controller
             // return 'from';
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $fromDate)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'from_date' => $fromDate,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'from_date' => $fromDate,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $fromDate)->get();
@@ -298,10 +297,10 @@ class ProjectController extends Controller
             // return 'to';
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $toDate)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'to_date' => $toDate,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'to_date' => $toDate,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $toDate)->get();
@@ -323,10 +322,10 @@ class ProjectController extends Controller
             // return 'client';
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("client_id", $request->client)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'client' => $request->client,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'client' => $request->client,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("client_id", $request->client)->get();
@@ -348,10 +347,10 @@ class ProjectController extends Controller
             // return 'division';
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("divisi_id", $request->division)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'division' => $request->division,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'division' => $request->division,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("divisi_id", $request->division)->get();
@@ -374,11 +373,11 @@ class ProjectController extends Controller
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $fromDate)
                 ->where("client_id", $request->client)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'from_date' => $fromDate,
-                'client' => $request->client,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'from_date' => $fromDate,
+            //     'client' => $request->client,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $fromDate)
@@ -404,11 +403,11 @@ class ProjectController extends Controller
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $fromDate)
                 ->where("divisi_id", $request->division)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'from_date' => $fromDate,
-                'division' => $request->division,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'from_date' => $fromDate,
+            //     'division' => $request->division,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $fromDate)
@@ -436,11 +435,11 @@ class ProjectController extends Controller
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $toDate)
                 ->where("client_id", $request->client)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'to_date' => $toDate,
-                'client' => $request->client,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'to_date' => $toDate,
+            //     'client' => $request->client,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $toDate)
@@ -466,11 +465,11 @@ class ProjectController extends Controller
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $toDate)
                 ->where("divisi_id", $request->division)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'to_date' => $toDate,
-                'division' => $request->division,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'to_date' => $toDate,
+            //     'division' => $request->division,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", $toDate)
@@ -496,11 +495,11 @@ class ProjectController extends Controller
             $projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", ">=", $fromDate)
                 ->where("tgl_input", "<=", $toDate)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'from_date' => $fromDate,
-                'to_date' => $toDate,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'from_date' => $fromDate,
+            //     'to_date' => $toDate,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", ">=", $fromDate)
@@ -527,12 +526,12 @@ class ProjectController extends Controller
                 ->where("tgl_input", ">=", $fromDate)
                 ->where("tgl_input", "<=", $toDate)
                 ->where("divisi_id", $request->division)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'from_date' => $fromDate,
-                'to_date' => $toDate,
-                'divisi' => $request->division,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'from_date' => $fromDate,
+            //     'to_date' => $toDate,
+            //     'divisi' => $request->division,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", ">=", $fromDate)
@@ -562,12 +561,12 @@ class ProjectController extends Controller
                 ->where("tgl_input", ">=", $fromDate)
                 ->where("tgl_input", "<=", $toDate)
                 ->where("client_id", $request->client)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'from_date' => $fromDate,
-                'to_date' => $toDate,
-                'client' => $request->client,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'from_date' => $fromDate,
+            //     'to_date' => $toDate,
+            //     'client' => $request->client,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", ">=", $fromDate)
@@ -598,12 +597,12 @@ class ProjectController extends Controller
                 ->where("tgl_input", ">=", $fromDate)
                 ->where("client_id", $request->client)
                 ->where("divisi_id", $request->division)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'from_date' => $fromDate,
-                'client' => $request->client,
-                'division' => $request->division,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'from_date' => $fromDate,
+            //     'client' => $request->client,
+            //     'division' => $request->division,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", ">=", $fromDate)
@@ -633,12 +632,12 @@ class ProjectController extends Controller
                 ->where("tgl_input", ">=", $toDate)
                 ->where("client_id", $request->client)
                 ->where("divisi_id", $request->division)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'to_date' => $toDate,
-                'client' => $request->client,
-                'division' => $request->division,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'to_date' => $toDate,
+            //     'client' => $request->client,
+            //     'division' => $request->division,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", ">=", $toDate)
@@ -668,13 +667,13 @@ class ProjectController extends Controller
                 ->where("tgl_input", "<=", $toDate)
                 ->where("client_id", $request->client)
                 ->where("divisi_id", $request->division)
-                ->orderBy('status', 'asc');
-            $projects = $projects->paginate(10)->appends([
-                'from_date' => $fromDate,
-                'to_date' => $toDate,
-                'client' => $request->client,
-                'division' => $request->division,
-            ]);
+                ->orderBy('status', 'asc')->get();
+            // $projects = $projects->paginate(10)->appends([
+            //     'from_date' => $fromDate,
+            //     'to_date' => $toDate,
+            //     'client' => $request->client,
+            //     'division' => $request->division,
+            // ]);
 
             $count_projects = Project::with('companies', 'clients', 'divisions', 'users')
                 ->where("tgl_input", ">=", $fromDate)
@@ -703,6 +702,9 @@ class ProjectController extends Controller
         } else {
             return redirect()->back()->with('errors', 'Please fill out the form!');
         }
+
+        if ($pluck_mulai == NULL || $pluck_selesai == NULL)
+            return redirect()->back()->with('errors', 'Start date and End date cannot be empty');
 
         $count_mulai = count($pluck_mulai);
         $count_selesai = count($pluck_selesai);
@@ -919,8 +921,8 @@ class ProjectController extends Controller
             ->where($name, $val)
             ->whereIn('type', ['Single', 'Group'])
             ->orderBy('status', 'asc')
-            ->orderBy('id', 'desc');
-        $projects = $projects->paginate(10);
+            ->orderBy('id', 'desc')->get();
+        // $projects = $projects->paginate(10);
 
         //wide modal
         $pluck_mulai = Project::select('tgl_mulai')
