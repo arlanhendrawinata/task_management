@@ -22,7 +22,6 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "monolog/monolog": "^2.3",
-        "spatie/ignition": "^1.2",
         "spatie/ignition": "^1.2.4",
         "spatie/flare-client-php": "^1.0.1",
         "symfony/console": "^5.0|^6.0",
@@ -61,7 +60,10 @@
     "autoload": {
         "psr-4": {
             "Spatie\\LaravelIgnition\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -72,6 +74,7 @@
     "prefer-stable": true,
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
+        "baseline": "vendor/bin/phpstan --generate-baseline",
         "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"

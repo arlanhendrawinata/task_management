@@ -10,10 +10,11 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <h4 class="text-center mb-4">Forgot Password</h4>
-                                <form action="/admin">
+                                <form action="{{ route('forgot-password-send') }}" method="POST">
+                                    @csrf
                                     <div class="form-group">
                                         <label><strong>Email</strong></label>
-                                        <input type="email" class="form-control" value="">
+                                        <input type="email" class="form-control" name="email">
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary btn-block">SUBMIT</button>

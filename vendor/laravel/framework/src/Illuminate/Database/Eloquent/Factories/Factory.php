@@ -207,7 +207,7 @@ abstract class Factory
     }
 
     /**
-     * Create a single model and persist it to the database.
+     * Create a single model and persist it to the database without dispatching any model events.
      *
      * @param  (callable(array<string, mixed>): array<string, mixed>)|array<string, mixed>  $attributes
      * @return \Illuminate\Database\Eloquent\Model|TModel
@@ -233,7 +233,7 @@ abstract class Factory
     }
 
     /**
-     * Create a collection of models and persist them to the database.
+     * Create a collection of models and persist them to the database without dispatching any model events.
      *
      * @param  iterable<int, array<string, mixed>>  $records
      * @return \Illuminate\Database\Eloquent\Collection<int, \Illuminate\Database\Eloquent\Model|TModel>
@@ -274,7 +274,7 @@ abstract class Factory
     }
 
     /**
-     * Create a collection of models and persist them to the database.
+     * Create a collection of models and persist them to the database without dispatching any model events.
      *
      * @param  array<string, mixed>  $attributes
      * @param  \Illuminate\Database\Eloquent\Model|null  $parent
@@ -296,9 +296,7 @@ abstract class Factory
      */
     public function lazy(array $attributes = [], ?Model $parent = null)
     {
-        return function () use ($attributes, $parent) {
-            return $this->create($attributes, $parent);
-        };
+        return fn () => $this->create($attributes, $parent);
     }
 
     /**
@@ -449,27 +447,34 @@ abstract class Factory
      */
     protected function expandAttributes(array $definition)
     {
-        return collect($definition)->map(function ($attribute, $key) use (&$definition) {
-            if (is_callable($attribute) && ! is_string($attribute) && ! is_array($attribute)) {
-                $attribute = $attribute($definition);
-            }
+        return collect($definition)
+            ->map($evaluateRelations = function ($attribute) {
+                if ($attribute instanceof self) {
+                    $attribute = $attribute->create()->getKey();
+                } elseif ($attribute instanceof Model) {
+                    $attribute = $attribute->getKey();
+                }
 
-            if ($attribute instanceof self) {
-                $attribute = $attribute->create()->getKey();
-            } elseif ($attribute instanceof Model) {
-                $attribute = $attribute->getKey();
-            }
+                return $attribute;
+            })
+            ->map(function ($attribute, $key) use (&$definition, $evaluateRelations) {
+                if (is_callable($attribute) && ! is_string($attribute) && ! is_array($attribute)) {
+                    $attribute = $attribute($definition);
+                }
 
-            $definition[$key] = $attribute;
+                $attribute = $evaluateRelations($attribute);
 
-            return $attribute;
-        })->all();
+                $definition[$key] = $attribute;
+
+                return $attribute;
+            })
+            ->all();
     }
 
     /**
      * Add a new state transformation to the model definition.
      *
-     * @param  (callable(array<string, mixed>): array<string, mixed>)|array<string, mixed>  $state
+     * @param  (callable(array<string, mixed>, \Illuminate\Database\Eloquent\Model|null=): array<string, mixed>)|array<string, mixed>  $state
      * @return static
      */
     public function state($state)
@@ -484,6 +489,18 @@ abstract class Factory
     }
 
     /**
+     * Set a single model attribute.
+     *
+     * @param  string|int  $key
+     * @param  mixed  $value
+     * @return static
+     */
+    public function set($key, $value)
+    {
+        return $this->state([$key => $value]);
+    }
+
+    /**
      * Add a new sequenced state transformation to the model definition.
      *
      * @param  array  $sequence
@@ -492,6 +509,17 @@ abstract class Factory
     public function sequence(...$sequence)
     {
         return $this->state(new Sequence(...$sequence));
+    }
+
+    /**
+     * Add a new sequenced state transformation to the model definition and update the pending creation count to the size of the sequence.
+     *
+     * @param  array  $sequence
+     * @return static
+     */
+    public function forEachSequence(...$sequence)
+    {
+        return $this->state(new Sequence(...$sequence))->count(count($sequence));
     }
 
     /**
