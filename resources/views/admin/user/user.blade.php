@@ -79,7 +79,6 @@
     .alignLeft {
         text-align: left !important;
     }
-
 </style>
 
 <div class="container-fluid">
@@ -116,6 +115,7 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Role</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Can_add_task</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -138,24 +138,38 @@
                                         Anggota
                                         @endif
                                     </td>
-                                    <td> <?php if($data->status == 1){ ?>
-                                        <form action="{{  route('goto-updateStatus-dbusers',['id'=>$data->id,'status'=>0])}}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <input type="text" name="id" value="{{ $data->id }}" hidden>
-                                            <button type="submit" class="btn infostatus" name="active" value="0" type="submit">Active</button>
-                                        </form>
-                                        <?php } else{ ?>
-                                        <form action="{{  route('goto-updateStatus-dbusers',['id'=>$data->id,'status'=>1])}}" method="POST">
-                                            @csrf
-                                            @method('put')
-                                            <input type="text" name="id" value="{{ $data->id }}" hidden>
-                                            <button type="submit" class="btn inactive" name="inactive" value="1" type="submit">Inactive</button>
-                                        </form>
-                                        <?php }?>
+                                    <td> <?php if ($data->status == 1) { ?>
+                                            <form action="{{  route('goto-updateStatus-dbusers',['id'=>$data->id,'status'=>0])}}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <input type="text" name="id" value="{{ $data->id }}" hidden>
+                                                <button type="submit" class="btn infostatus" name="active" value="0" type="submit">Active</button>
+                                            </form>
+                                        <?php } else { ?>
+                                            <form action="{{  route('goto-updateStatus-dbusers',['id'=>$data->id,'status'=>1])}}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <input type="text" name="id" value="{{ $data->id }}" hidden>
+                                                <button type="submit" class="btn inactive" name="inactive" value="1" type="submit">Inactive</button>
+                                            </form>
+                                        <?php } ?>
                                     </td>
-                                    {{-- <td>{{ $data->created_at }}</td>
-                                    <td>{{ $data->updated_at }}</td> --}}
+                                    <td> <?php if ($data->can_add_task == 1) { ?>
+                                            <form action="{{  route('can-add-task',['id'=>$data->id,'val'=>0])}}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <input type="text" name="id" value="{{ $data->id }}" hidden>
+                                                <button type="submit" class="btn infostatus" name="can_add_task" value="0" type="submit">True</button>
+                                            </form>
+                                        <?php } else { ?>
+                                            <form action="{{  route('can-add-task',['id'=>$data->id,'val'=>1])}}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                <input type="text" name="id" value="{{ $data->id }}" hidden>
+                                                <button type="submit" class="btn inactive" name="can_add_task" value="1" type="submit">False</button>
+                                            </form>
+                                        <?php } ?>
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
 

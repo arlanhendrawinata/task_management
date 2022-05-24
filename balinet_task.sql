@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `companies` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table balinet_task.companies: ~1 rows (approximately)
+-- Dumping data for table balinet_task.companies: ~0 rows (approximately)
 /*!40000 ALTER TABLE `companies` DISABLE KEYS */;
 INSERT INTO `companies` (`id`, `nama_perusahaan`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 'CV. Balinet Intermedia', 1, NULL, NULL);
@@ -163,7 +163,7 @@ INSERT INTO `divisions` (`id`, `nama_divisi`, `status`, `created_at`, `updated_a
 	(7, 'Distribution', 1, '2022-04-15 01:53:58', '2022-04-15 01:53:58'),
 	(8, 'Accounting', 1, '2022-04-15 02:48:30', '2022-04-15 02:48:30'),
 	(9, 'Digital Marketing', 1, '2022-04-15 02:49:04', '2022-04-15 02:49:04'),
-	(10, 'Kerja Praktek', 1, '2022-04-21 01:23:20', '2022-04-21 01:23:20');
+	(10, 'Kerja Praktek', 0, '2022-04-21 01:23:20', '2022-05-21 14:13:05');
 /*!40000 ALTER TABLE `divisions` ENABLE KEYS */;
 
 -- Dumping structure for table balinet_task.finances
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `finances` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table balinet_task.finances: ~1 rows (approximately)
+-- Dumping data for table balinet_task.finances: ~0 rows (approximately)
 /*!40000 ALTER TABLE `finances` DISABLE KEYS */;
 INSERT INTO `finances` (`id`, `name`, `detail`, `img`, `value`, `type`, `offices_id`, `users_id`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 'kokokoko', 'ko', 'C:\\Users\\Lann\\AppData\\Local\\Temp\\phpC6B3.tmp', 2, 'out', 1, 1, 1, '2022-05-17 16:22:32', '2022-05-18 11:31:12');
@@ -198,9 +198,9 @@ CREATE TABLE IF NOT EXISTS `login_logs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=356 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=378 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table balinet_task.login_logs: ~355 rows (approximately)
+-- Dumping data for table balinet_task.login_logs: ~307 rows (approximately)
 /*!40000 ALTER TABLE `login_logs` DISABLE KEYS */;
 INSERT INTO `login_logs` (`id`, `user_id`, `ip_address`, `mac_address`, `browser`, `created_at`, `updated_at`) VALUES
 	(1, 1, '140.213.234.23', '', 'Firefox', '2022-04-13 01:22:31', '2022-04-13 01:22:31'),
@@ -557,7 +557,29 @@ INSERT INTO `login_logs` (`id`, `user_id`, `ip_address`, `mac_address`, `browser
 	(352, 1, '192.168.1.85', '98-28-A6-48-80-E9', 'Firefox', '2022-05-17 15:19:44', '2022-05-17 15:19:44'),
 	(353, 1, '192.168.1.100', '98-28-A6-48-80-E9', 'Safari Browser', '2022-05-17 15:53:38', '2022-05-17 15:53:38'),
 	(354, 1, '192.168.1.100', '98-28-A6-48-80-E9', 'Safari Browser', '2022-05-17 15:53:55', '2022-05-17 15:53:55'),
-	(355, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-18 10:20:30', '2022-05-18 10:20:30');
+	(355, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-18 10:20:30', '2022-05-18 10:20:30'),
+	(356, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-18 14:50:54', '2022-05-18 14:50:54'),
+	(357, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-18 15:20:05', '2022-05-18 15:20:05'),
+	(358, 25, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-18 15:20:42', '2022-05-18 15:20:42'),
+	(359, 25, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-18 15:22:51', '2022-05-18 15:22:51'),
+	(360, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-18 15:25:16', '2022-05-18 15:25:16'),
+	(361, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-19 11:53:05', '2022-05-19 11:53:05'),
+	(362, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Chrome', '2022-05-19 16:26:14', '2022-05-19 16:26:14'),
+	(363, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-19 17:46:28', '2022-05-19 17:46:28'),
+	(364, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-20 10:04:45', '2022-05-20 10:04:45'),
+	(365, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Chrome', '2022-05-20 10:21:08', '2022-05-20 10:21:08'),
+	(366, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Chrome', '2022-05-20 10:59:34', '2022-05-20 10:59:34'),
+	(367, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-21 10:01:40', '2022-05-21 10:01:40'),
+	(368, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Chrome', '2022-05-21 10:56:12', '2022-05-21 10:56:12'),
+	(369, 1, '192.168.1.85', '98-28-A6-48-80-E9', 'Chrome', '2022-05-21 11:15:11', '2022-05-21 11:15:11'),
+	(370, 1, '192.168.1.91', '98-28-A6-48-80-E9', 'Chrome', '2022-05-21 11:15:23', '2022-05-21 11:15:23'),
+	(371, 1, '192.168.1.85', '98-28-A6-48-80-E9', 'Chrome', '2022-05-21 12:35:58', '2022-05-21 12:35:58'),
+	(372, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-21 12:42:49', '2022-05-21 12:42:49'),
+	(373, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-21 14:12:27', '2022-05-21 14:12:27'),
+	(374, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Firefox', '2022-05-23 16:00:22', '2022-05-23 16:00:22'),
+	(375, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Chrome', '2022-05-24 10:17:08', '2022-05-24 10:17:08'),
+	(376, 1, '127.0.0.1', '98-28-A6-48-80-E9', 'Chrome', '2022-05-24 13:40:37', '2022-05-24 13:40:37'),
+	(377, 7, '127.0.0.1', '98-28-A6-48-80-E9', 'Chrome', '2022-05-24 14:21:39', '2022-05-24 14:21:39');
 /*!40000 ALTER TABLE `login_logs` ENABLE KEYS */;
 
 -- Dumping structure for table balinet_task.migrations
@@ -566,10 +588,12 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table balinet_task.migrations: ~0 rows (approximately)
+-- Dumping data for table balinet_task.migrations: ~1 rows (approximately)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+	(3, '2022_05_24_102500_create_notifications_table', 1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table balinet_task.notes
@@ -581,13 +605,37 @@ CREATE TABLE IF NOT EXISTS `notes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table balinet_task.notes: ~1 rows (approximately)
+-- Dumping data for table balinet_task.notes: ~5 rows (approximately)
 /*!40000 ALTER TABLE `notes` DISABLE KEYS */;
 INSERT INTO `notes` (`id`, `project_id`, `user_id`, `keterangan`, `created_at`, `updated_at`) VALUES
-	(4, 20, 9, 'Detail laptop \r\nAsus X200ca', '2022-04-19 01:19:09', '2022-04-19 01:19:09');
+	(4, 20, 9, 'Detail laptop \r\nAsus X200ca', '2022-04-19 01:19:09', '2022-04-19 01:19:09'),
+	(5, 130, 1, 'tes note notif', '2022-05-24 11:09:07', '2022-05-24 11:09:07'),
+	(6, 130, 1, 'tes note notif', '2022-05-24 11:09:29', '2022-05-24 11:09:29'),
+	(7, 130, 1, 'tes note notif', '2022-05-24 11:16:07', '2022-05-24 11:16:07'),
+	(8, 130, 1, 'tes note notif', '2022-05-24 11:18:41', '2022-05-24 11:18:41');
 /*!40000 ALTER TABLE `notes` ENABLE KEYS */;
+
+-- Dumping structure for table balinet_task.notifications
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_id` bigint(20) unsigned NOT NULL,
+  `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table balinet_task.notifications: ~1 rows (approximately)
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
+	('d121144b-fe40-4fb8-9f20-e4e1de099c7a', 'App\\Notifications\\NoteNotification', 'App\\Models\\User', 1, '{"project_id":"130","user_id":1,"keterangan":"tes note notif"}', NULL, '2022-05-24 11:18:41', '2022-05-24 11:18:41');
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 
 -- Dumping structure for table balinet_task.pics
 CREATE TABLE IF NOT EXISTS `pics` (
@@ -598,9 +646,9 @@ CREATE TABLE IF NOT EXISTS `pics` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table balinet_task.pics: ~70 rows (approximately)
+-- Dumping data for table balinet_task.pics: ~64 rows (approximately)
 /*!40000 ALTER TABLE `pics` DISABLE KEYS */;
 INSERT INTO `pics` (`id`, `project_id`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 1, 7, 1, '2022-04-14 06:08:28', '2022-04-14 06:08:28'),
@@ -672,7 +720,9 @@ INSERT INTO `pics` (`id`, `project_id`, `user_id`, `status`, `created_at`, `upda
 	(75, 135, 7, 1, '2022-04-23 11:31:21', '2022-04-23 11:31:21'),
 	(76, 139, 16, 1, '2022-04-23 11:31:27', '2022-04-23 11:31:27'),
 	(77, 122, 7, 1, '2022-04-25 09:56:45', '2022-04-25 09:56:45'),
-	(78, 118, 7, 1, '2022-04-25 12:54:15', '2022-04-25 12:54:15');
+	(78, 118, 7, 1, '2022-04-25 12:54:15', '2022-04-25 12:54:15'),
+	(79, 129, 1, 1, '2022-05-18 15:27:39', '2022-05-18 15:27:39'),
+	(80, 127, 7, 1, '2022-05-24 14:47:15', '2022-05-24 14:47:15');
 /*!40000 ALTER TABLE `pics` ENABLE KEYS */;
 
 -- Dumping structure for table balinet_task.projects
@@ -702,9 +752,9 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `project_id_2` int(11) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table balinet_task.projects: ~52 rows (approximately)
+-- Dumping data for table balinet_task.projects: ~46 rows (approximately)
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
 INSERT INTO `projects` (`id`, `client_id`, `divisi_id`, `user_id`, `perusahaan_id`, `judul_project`, `detail_project`, `tgl_input`, `tgl_mulai`, `estimasi`, `tgl_selesai`, `status`, `prioritas`, `total_revisi`, `laporan_project`, `debet`, `kredit`, `foto_hasil`, `type`, `is_parent`, `project_id`, `created_at`, `project_id_2`, `updated_at`) VALUES
 	(6, 6, 4, 9, 1, 'Pasang Cctv 2 Titik', 'Survey dan sekalian pasang cctv', '2022-04-13', '2022-04-13', '2022-04-13', '2022-04-13', 5, 2, 0, NULL, 0, 0, 'https://i.ibb.co/KNXKjxC/IMG-20220413-170244-jpg.jpg', 'Single', 0, NULL, '2022-04-15 02:53:43', NULL, '2022-04-15 03:06:42'),
@@ -757,8 +807,10 @@ INSERT INTO `projects` (`id`, `client_id`, `divisi_id`, `user_id`, `perusahaan_i
 	(124, 6, 2, 1, 1, 'Membuat Fitur Manajemen Gallery (CRUD) - Modul Gallery - Level: Admin', 'Wewewe', '2022-05-13', '2022-05-13', '2022-05-28', '2022-05-30', 4, 0, 0, '', 0, 0, NULL, 'Single', 0, NULL, '2022-05-13 14:56:41', NULL, '2022-05-13 14:59:03'),
 	(125, 6, 2, 1, 1, 'Relakansaja', 'Wrwrwr', '2022-05-13', '2022-05-13', '2022-05-13', '2022-06-13', 4, 0, 0, '', 0, 0, NULL, 'Single', 0, NULL, '2022-05-13 16:24:32', NULL, '2022-05-13 16:26:51'),
 	(126, 8, 2, 1, 1, '4 Bulan', 'Stroke', '2022-05-13', '2022-05-13', '2022-05-30', '2022-07-13', 1, 2, 0, '', 0, 0, NULL, 'Single', 0, NULL, '2022-05-13 16:29:20', NULL, '2022-05-13 16:29:47'),
-	(127, 7, 2, 1, 1, '5 Bulan', '% Bulan', '2022-05-13', '2022-05-13', '2022-05-13', '2022-08-13', 1, 2, 0, '', 0, 0, NULL, 'Single', 0, NULL, '2022-05-13 16:33:18', NULL, '2022-05-13 16:33:44'),
-	(128, 7, 2, 1, 1, '7 Bln', '7 Bln', '2022-05-13', '2022-12-31', '2022-05-13', '2023-01-31', 1, 0, 0, '', 0, 0, NULL, 'Single', 0, NULL, '2022-05-13 16:34:56', NULL, '2022-05-13 16:49:55');
+	(127, 7, 2, 1, 1, '5 Bulan', '% Bulan', '2022-05-13', '2022-05-24', '2022-05-13', '2022-05-24', 4, 2, 0, NULL, 0, 0, NULL, 'Single', 0, NULL, '2022-05-13 16:33:18', NULL, '2022-05-24 14:47:27'),
+	(128, 7, 2, 1, 1, '7 Bln', '7 Bln', '2022-05-13', '2022-05-18', '2022-05-13', '2023-01-31', 2, 0, 0, '', 0, 0, NULL, 'Single', 0, NULL, '2022-05-13 16:34:56', NULL, '2022-05-18 15:26:10'),
+	(129, 6, 1, 1, 1, 'Asd', 'Asd', '2022-05-18', '2022-05-18', '2022-05-19', '2022-05-18', 5, 0, 0, 'kjjhkjkj', 0, 0, NULL, 'Single', 0, NULL, '2022-05-18 15:27:33', NULL, '2022-05-18 15:28:59'),
+	(130, 6, 1, 1, 1, 'Arlan', 'Asd', '2022-05-19', NULL, '2022-05-19', NULL, 1, 0, 0, '', 0, 0, NULL, 'Single', 0, NULL, '2022-05-19 20:34:59', NULL, '2022-05-19 20:34:59');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 
 -- Dumping structure for table balinet_task.users
@@ -769,46 +821,49 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status` int(11) NOT NULL,
   `password` text NOT NULL,
   `is_member` int(11) DEFAULT '0',
+  `can_add_task` int(2) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table balinet_task.users: ~32 rows (approximately)
+-- Dumping data for table balinet_task.users: ~34 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `nama`, `email`, `status`, `password`, `is_member`, `created_at`, `updated_at`) VALUES
-	(1, 'Admin', 'admin@gmail.com', 1, '$2y$10$DbRjI4X1YT3q33BtuxVPTONj0BV9.CvJzWVnXrj8vobeKhBszX4ry', 0, '2022-03-23 09:03:48', '2022-04-10 08:47:58'),
-	(2, 'Manajemen', 'manajemen@gmail.com', 1, '$2y$10$cU/52EaBFYl70erPdnxeLOygmhmf7xDGM8rk5R2bmXhiKIBp3R6PW', 0, '2022-04-09 16:15:25', '2022-04-13 00:53:25'),
-	(7, 'Arya', 'arya@gmail.com', 1, '$2y$10$LnezRbv.Mljricq8Pd1/Bu8rx2Yknn/9zYShcnxlYgCX.0XyrpBUq', 0, '2022-04-09 16:25:36', '2022-04-10 08:58:03'),
-	(9, 'Danang Sepprian Mukhti', 'danang@gmail.com', 1, '$2y$10$PuxHceK43.zTB6hjTwqETOyHauuxDrR5x87yRhRCXd/KXYedDa2eC', 0, '2022-04-09 16:32:40', '2022-04-15 03:39:41'),
-	(16, 'Sulistyadewi', 'sulistyadewi@gmail.com', 1, '$2y$10$LnezRbv.Mljricq8Pd1/Bu8rx2Yknn/9zYShcnxlYgCX.0XyrpBUq', 0, '2022-04-10 09:01:00', '2022-04-20 04:45:18'),
-	(17, 'Bagus Priatmaja', 'bagus@gmail.com', 1, '$2y$10$DbRjI4X1YT3q33BtuxVPTONj0BV9.CvJzWVnXrj8vobeKhBszX4ry', 0, '2022-04-10 09:04:44', '2022-04-16 07:12:05'),
-	(19, 'Fairdy', 'fairdy@gmail.com', 1, '$2y$10$WXB4GlffsCqB.yOt.Ckl5.P2wPcB6vMVzIpIXRCLoRnmNy1hldu5i', 1, '2022-04-13 01:37:18', '2022-04-13 01:37:18'),
-	(20, 'Yayasan Senyum', 'senyum@gmail.com', 1, '$2y$10$lYwjr80EaS8h5rqQurVFme.lNgSYpc.TDZLw.Y5NtKNiOYHLqMHvy', 1, '2022-04-13 02:17:13', '2022-04-13 02:17:13'),
-	(21, 'Nia Cak mat', 'nia@gmail.com', 1, '$2y$10$JoStBmsPmrzxdfTOBzo5z.zaqiaGKSduwun7tU3YXMYovuVBEW0li', 1, '2022-04-13 02:39:27', '2022-04-13 02:39:27'),
-	(22, 'Tatit Sulistyo Prabowo', 'tatit.prabowo@gmail.com', 1, '$2y$10$BEqohq/lLQBunlRPF1xtTuT8t0D8529bk83u8XTddzIHU6TJcQZLy', 0, '2022-04-13 23:22:11', '2022-04-15 02:51:50'),
-	(23, 'Yunita Aryani', 'yunita@gmail.com', 1, '$2y$10$hQT/CW.RX72f.Yjx33lQAuk35PVvelNEsstS5BElYoF8ZySsNlHmW', 1, '2022-04-13 23:23:59', '2022-04-13 23:23:59'),
-	(24, 'Krisna Adi', 'krisnaadi@gmail.com', 1, '$2y$10$bFqq1OHJAFSQtne1/ZPKC.L.ZUnbiSvD5u2sPeIbarBbF4fgfb1GW', 0, '2022-04-14 02:01:46', '2022-04-14 02:04:57'),
-	(25, 'Arlan', 'arlan@gmail.com', 1, '$2y$10$BB5Ng6if0Z2eGuPt2AakCe1kt5nPmLzfB1NSQ5G.grgRs2Qr3cxhu', 0, '2022-04-14 02:27:58', '2022-04-14 04:24:03'),
-	(26, 'Adi Warsa', 'adiwarsa@gmail.com', 1, '$2y$10$x674ba9QdNrw1lROXBVjCOFb7JWGScJijYR5rrktGcDQcZ/FpsgXy', 0, '2022-04-14 03:20:00', '2022-04-14 07:50:14'),
-	(27, 'Guswah', 'guswah@gmail.com', 1, '$2y$10$DbRjI4X1YT3q33BtuxVPTONj0BV9.CvJzWVnXrj8vobeKhBszX4ry', 0, '2022-04-14 03:21:10', '2022-04-14 11:22:55'),
-	(28, 'Ngurah Dwi Putra', 'ngurah@gmail.com', 1, '$2y$10$xgMsV4LrNUwP7.GhWwqQEeiI5cFgXoFXiFZFv9KjLc5jep3eUtq/m', 1, '2022-04-14 06:04:55', '2022-04-14 06:04:55'),
-	(29, 'Teguh Otong', 'teguh@gmail.com', 1, '$2y$10$hEAnYLI2l9g4tiP03rxnweDy1I0Fo3beWl7YTIBP9D2L6XvrLFHY2', 1, '2022-04-14 06:20:49', '2022-04-14 06:20:49'),
-	(30, 'Berly', 'berly@gmail.com', 1, '$2y$10$owBQY/0I5E.pHgPMmV7JS.2YX8mvTRrPdpxZQs7EWMD94xAVH73Lq', 1, '2022-04-15 03:10:27', '2022-04-15 03:10:27'),
-	(31, 'Nigel Easton', 'nigel@gmail.com', 1, '$2y$10$W4nC.8ZbeXx2B47CqtP1UOhexFkbbjl4ORKW/Ytf9g9c8MRNVuBWy', 1, '2022-04-15 03:11:09', '2022-04-15 03:11:09'),
-	(32, 'Leo Darsana', 'leo@gmail.com', 1, '$2y$10$431vz276TVJ5PQ08Obde9u9OJ0i6kRN8JjrCDa.fxIpIQyRlDrlVa', 1, '2022-04-15 03:12:12', '2022-04-15 03:12:12'),
-	(33, 'PT. Global Digital Verse', 'globaldigitalverse1@gmail.com', 1, '$2y$10$nN3GZsbtqdFkwCLutSeS7.E2dgWZE.1azCsc6j8ni5y2TI2Cx9Sgu', 1, '2022-04-16 07:30:32', '2022-04-16 07:30:32'),
-	(34, 'Gede Kitara', 'gede@gmail.com', 1, '$2y$10$0.j8uZZ5UJbTdUxNqHORteMaus9iZu.BYwz7OwOCz3253Dqt303x6', 1, '2022-04-19 01:02:44', '2022-04-19 01:02:44'),
-	(35, 'Astrid', 'astrid@globalmanagement.com', 1, '$2y$10$R6rpvCjFPKTNZmt../16l.HoWeGvsVq34E2puYa72EV9FYyFk4ukS', 1, '2022-04-19 07:49:12', '2022-04-19 07:49:12'),
-	(36, 'Mahendra', 'mahendra@gmail.com', 1, '$2y$10$QxqGNuCQMlphKy05YOTbue39pDyjJpanXGJCRn8IX/9HET5w6yPo.', 1, '2022-04-19 12:53:05', '2022-04-19 12:53:05'),
-	(37, 'Kevin', 'kevin@gmail.com', 1, '$2y$10$oW74LyRtl1gsVipJgfsl6.gMhkHnazCSJlz0BW/4KwO/mRRNur0Ry', 1, '2022-04-20 21:34:56', '2022-04-20 21:34:56'),
-	(38, 'Dyah Loka Santi', 'dyah@gmail.com', 1, '$2y$10$c2IDa0kLHpAvWeEMyr.qjuyj0bTgxw/iT/ed1S6DPKbrGMRLA4b.K', 1, '2022-04-20 23:55:26', '2022-04-20 23:55:26'),
-	(39, 'Mata Studio', 'matastudio@gmail.com', 1, '$2y$10$cDWfsfUuoPt3h6IKmHIO3.a.D0fCFDRKDY/Sg52nzL.wCD6.V/TTe', 1, '2022-04-22 00:18:12', '2022-04-22 00:18:12'),
-	(40, 'Mukbang', 'mukbang@gmail.com', 1, '$2y$10$rCoc8A5YK2DU77Xlek4Y.uvvKLEZZzjSbKeu88xRcUh3kWLu8TIyG', 1, '2022-04-23 00:19:11', '2022-04-23 00:19:11'),
-	(41, 'GTL', 'gtl@gmail.com', 1, '$2y$10$gbimBxeHUL.1qnZk88FLfeA6YqD4/OxDdz1JbNsZwg7AVhj32WvqG', 1, '2022-04-23 01:18:00', '2022-04-23 01:18:00'),
-	(42, 'Global Podcast bali', 'admin@global.com', 1, '$2y$10$IEpiCxTZpzOWhS62mNnru.6vay6QDWDWgniOXKsYMZnUFJ7zD2hfO', 1, '2022-04-23 01:18:43', '2022-04-23 01:18:43'),
-	(43, 'Global Management', 'admin@globalmanagement.id', 1, '$2y$10$1V.4oegHssmMaVLFOAPXYezkT81k1Kh.tgiW0.acKhD1PSiEoQdA.', 1, '2022-04-23 01:19:37', '2022-04-23 01:19:37'),
-	(44, 'Villah Nusatrip', 'villah@gmail.com', 1, '$2y$10$fv4R0ZXk/QI3pDij51YEfu/Z9Bi1ks4MdRx4BZhTDugwkKjsMtJZe', 1, '2022-04-23 02:41:20', '2022-04-23 02:41:20');
+INSERT INTO `users` (`id`, `nama`, `email`, `status`, `password`, `is_member`, `can_add_task`, `created_at`, `updated_at`) VALUES
+	(1, 'Admin', 'admin@gmail.com', 1, '$2y$10$DbRjI4X1YT3q33BtuxVPTONj0BV9.CvJzWVnXrj8vobeKhBszX4ry', 0, NULL, '2022-03-23 09:03:48', '2022-04-10 08:47:58'),
+	(2, 'Manajemen', 'manajemen@gmail.com', 1, '$2y$10$cU/52EaBFYl70erPdnxeLOygmhmf7xDGM8rk5R2bmXhiKIBp3R6PW', 0, NULL, '2022-04-09 16:15:25', '2022-04-13 00:53:25'),
+	(7, 'Arya', 'arya@gmail.com', 1, '$2y$10$LnezRbv.Mljricq8Pd1/Bu8rx2Yknn/9zYShcnxlYgCX.0XyrpBUq', 0, NULL, '2022-04-09 16:25:36', '2022-04-10 08:58:03'),
+	(9, 'Danang Sepprian Mukhti', 'danang@gmail.com', 1, '$2y$10$PuxHceK43.zTB6hjTwqETOyHauuxDrR5x87yRhRCXd/KXYedDa2eC', 0, NULL, '2022-04-09 16:32:40', '2022-04-15 03:39:41'),
+	(16, 'Sulistyadewi', 'sulistyadewi@gmail.com', 1, '$2y$10$LnezRbv.Mljricq8Pd1/Bu8rx2Yknn/9zYShcnxlYgCX.0XyrpBUq', 0, NULL, '2022-04-10 09:01:00', '2022-04-20 04:45:18'),
+	(17, 'Bagus Priatmaja', 'bagus@gmail.com', 1, '$2y$10$DbRjI4X1YT3q33BtuxVPTONj0BV9.CvJzWVnXrj8vobeKhBszX4ry', 0, NULL, '2022-04-10 09:04:44', '2022-04-16 07:12:05'),
+	(19, 'Fairdy', 'fairdy@gmail.com', 1, '$2y$10$WXB4GlffsCqB.yOt.Ckl5.P2wPcB6vMVzIpIXRCLoRnmNy1hldu5i', 1, NULL, '2022-04-13 01:37:18', '2022-04-13 01:37:18'),
+	(20, 'Yayasan Senyum', 'senyum@gmail.com', 1, '$2y$10$lYwjr80EaS8h5rqQurVFme.lNgSYpc.TDZLw.Y5NtKNiOYHLqMHvy', 1, NULL, '2022-04-13 02:17:13', '2022-04-13 02:17:13'),
+	(21, 'Nia Cak mat', 'nia@gmail.com', 1, '$2y$10$JoStBmsPmrzxdfTOBzo5z.zaqiaGKSduwun7tU3YXMYovuVBEW0li', 1, NULL, '2022-04-13 02:39:27', '2022-04-13 02:39:27'),
+	(22, 'Tatit Sulistyo Prabowo', 'tatit.prabowo@gmail.com', 1, '$2y$10$BEqohq/lLQBunlRPF1xtTuT8t0D8529bk83u8XTddzIHU6TJcQZLy', 0, NULL, '2022-04-13 23:22:11', '2022-04-15 02:51:50'),
+	(23, 'Yunita Aryani', 'yunita@gmail.com', 1, '$2y$10$hQT/CW.RX72f.Yjx33lQAuk35PVvelNEsstS5BElYoF8ZySsNlHmW', 1, NULL, '2022-04-13 23:23:59', '2022-04-13 23:23:59'),
+	(24, 'Krisna Adi', 'krisnaadi@gmail.com', 1, '$2y$10$bFqq1OHJAFSQtne1/ZPKC.L.ZUnbiSvD5u2sPeIbarBbF4fgfb1GW', 0, NULL, '2022-04-14 02:01:46', '2022-04-14 02:04:57'),
+	(25, 'Arlan', 'arlan@gmail.com', 1, '$2y$10$.mJeHaoTbbkIIkYU1JgOTOCR2lyIfmMqthZrlNf7rJgwUGBUtW27C', 0, NULL, '2022-04-14 02:27:58', '2022-05-18 15:22:39'),
+	(26, 'Adi Warsa', 'adiwarsa@gmail.com', 1, '$2y$10$x674ba9QdNrw1lROXBVjCOFb7JWGScJijYR5rrktGcDQcZ/FpsgXy', 0, NULL, '2022-04-14 03:20:00', '2022-04-14 07:50:14'),
+	(27, 'Guswah', 'guswah@gmail.com', 1, '$2y$10$DbRjI4X1YT3q33BtuxVPTONj0BV9.CvJzWVnXrj8vobeKhBszX4ry', 0, NULL, '2022-04-14 03:21:10', '2022-04-14 11:22:55'),
+	(28, 'Ngurah Dwi Putra', 'ngurah@gmail.com', 1, '$2y$10$xgMsV4LrNUwP7.GhWwqQEeiI5cFgXoFXiFZFv9KjLc5jep3eUtq/m', 1, NULL, '2022-04-14 06:04:55', '2022-04-14 06:04:55'),
+	(29, 'Teguh Otong', 'teguh@gmail.com', 1, '$2y$10$hEAnYLI2l9g4tiP03rxnweDy1I0Fo3beWl7YTIBP9D2L6XvrLFHY2', 1, NULL, '2022-04-14 06:20:49', '2022-04-14 06:20:49'),
+	(30, 'Berly', 'berly@gmail.com', 1, '$2y$10$owBQY/0I5E.pHgPMmV7JS.2YX8mvTRrPdpxZQs7EWMD94xAVH73Lq', 1, NULL, '2022-04-15 03:10:27', '2022-04-15 03:10:27'),
+	(31, 'Nigel Easton', 'nigel@gmail.com', 1, '$2y$10$W4nC.8ZbeXx2B47CqtP1UOhexFkbbjl4ORKW/Ytf9g9c8MRNVuBWy', 1, NULL, '2022-04-15 03:11:09', '2022-04-15 03:11:09'),
+	(32, 'Leo Darsana', 'leo@gmail.com', 1, '$2y$10$431vz276TVJ5PQ08Obde9u9OJ0i6kRN8JjrCDa.fxIpIQyRlDrlVa', 1, NULL, '2022-04-15 03:12:12', '2022-04-15 03:12:12'),
+	(33, 'PT. Global Digital Verse', 'globaldigitalverse1@gmail.com', 1, '$2y$10$nN3GZsbtqdFkwCLutSeS7.E2dgWZE.1azCsc6j8ni5y2TI2Cx9Sgu', 1, NULL, '2022-04-16 07:30:32', '2022-04-16 07:30:32'),
+	(34, 'Gede Kitara', 'gede@gmail.com', 1, '$2y$10$0.j8uZZ5UJbTdUxNqHORteMaus9iZu.BYwz7OwOCz3253Dqt303x6', 1, NULL, '2022-04-19 01:02:44', '2022-04-19 01:02:44'),
+	(35, 'Astrid', 'astrid@globalmanagement.com', 1, '$2y$10$R6rpvCjFPKTNZmt../16l.HoWeGvsVq34E2puYa72EV9FYyFk4ukS', 1, NULL, '2022-04-19 07:49:12', '2022-04-19 07:49:12'),
+	(36, 'Mahendra', 'mahendra@gmail.com', 1, '$2y$10$QxqGNuCQMlphKy05YOTbue39pDyjJpanXGJCRn8IX/9HET5w6yPo.', 1, NULL, '2022-04-19 12:53:05', '2022-04-19 12:53:05'),
+	(37, 'Kevin', 'kevin@gmail.com', 1, '$2y$10$oW74LyRtl1gsVipJgfsl6.gMhkHnazCSJlz0BW/4KwO/mRRNur0Ry', 1, NULL, '2022-04-20 21:34:56', '2022-04-20 21:34:56'),
+	(38, 'Dyah Loka Santi', 'dyah@gmail.com', 1, '$2y$10$c2IDa0kLHpAvWeEMyr.qjuyj0bTgxw/iT/ed1S6DPKbrGMRLA4b.K', 1, NULL, '2022-04-20 23:55:26', '2022-04-20 23:55:26'),
+	(39, 'Mata Studio', 'matastudio@gmail.com', 1, '$2y$10$cDWfsfUuoPt3h6IKmHIO3.a.D0fCFDRKDY/Sg52nzL.wCD6.V/TTe', 1, NULL, '2022-04-22 00:18:12', '2022-04-22 00:18:12'),
+	(40, 'Mukbang', 'mukbang@gmail.com', 1, '$2y$10$rCoc8A5YK2DU77Xlek4Y.uvvKLEZZzjSbKeu88xRcUh3kWLu8TIyG', 1, NULL, '2022-04-23 00:19:11', '2022-04-23 00:19:11'),
+	(41, 'GTL', 'gtl@gmail.com', 1, '$2y$10$gbimBxeHUL.1qnZk88FLfeA6YqD4/OxDdz1JbNsZwg7AVhj32WvqG', 1, NULL, '2022-04-23 01:18:00', '2022-04-23 01:18:00'),
+	(42, 'Global Podcast bali', 'admin@global.com', 1, '$2y$10$IEpiCxTZpzOWhS62mNnru.6vay6QDWDWgniOXKsYMZnUFJ7zD2hfO', 1, NULL, '2022-04-23 01:18:43', '2022-04-23 01:18:43'),
+	(43, 'Global Management', 'admin@globalmanagement.id', 1, '$2y$10$1V.4oegHssmMaVLFOAPXYezkT81k1Kh.tgiW0.acKhD1PSiEoQdA.', 1, NULL, '2022-04-23 01:19:37', '2022-04-23 01:19:37'),
+	(44, 'Villah Nusatrip', 'villah@gmail.com', 1, '$2y$10$fv4R0ZXk/QI3pDij51YEfu/Z9Bi1ks4MdRx4BZhTDugwkKjsMtJZe', 1, NULL, '2022-04-23 02:41:20', '2022-04-23 02:41:20'),
+	(45, 'haha', 'haha@gmail.com', 1, '$2y$10$YY68AM5MGNpmXJVFGe1m3uyEVFzWOnNriULp4e8beYcWvVsQ7.7mW', 1, NULL, '2022-05-20 10:05:38', '2022-05-20 10:05:38'),
+	(49, 'adimet', 'akuntumbal3339@gmail.com', 1, '$2y$10$boumaI8tEBywf6sTxqtQ3uIfVx3p03qPdxq0hdGNBp1W97lc0m0mK', 0, 1, '2022-05-21 12:43:46', '2022-05-24 14:09:24');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table balinet_task.user_details
@@ -826,9 +881,9 @@ CREATE TABLE IF NOT EXISTS `user_details` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table balinet_task.user_details: ~11 rows (approximately)
+-- Dumping data for table balinet_task.user_details: ~14 rows (approximately)
 /*!40000 ALTER TABLE `user_details` DISABLE KEYS */;
 INSERT INTO `user_details` (`id`, `user_id`, `perusahaan_id`, `divisi_id`, `role`, `no_telp`, `alamat`, `nip`, `foto`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 1, 1, 1, 1, '0885241312727', 'Jalan Rajawali No. 15', '11723613', 'https://i.ibb.co/JBPWwRP/logo-Copy-png.png', 1, NULL, '2022-04-14 08:41:57'),
@@ -841,7 +896,10 @@ INSERT INTO `user_details` (`id`, `user_id`, `perusahaan_id`, `divisi_id`, `role
 	(13, 24, 1, 2, 4, '089162361', 'Jl. Pulau Ayu no.20', '190030888', 'teamwork-gc5a4b7b88_192062563d1a857e01649818906.jpg', 1, '2022-04-14 02:01:46', '2022-04-14 02:01:46'),
 	(14, 25, 1, 2, 4, '089518213', 'jl.Padang Sambian no.1', '1900129312', 'startup-gbfc902ace_19206256433e9dfa21649820478.jpg', 1, '2022-04-14 02:27:58', '2022-04-14 02:56:10'),
 	(15, 26, 1, 2, 4, '0891263167', 'Jl.Pulau Moyo no.56', '189023012', '', 1, '2022-04-14 03:20:00', '2022-04-14 03:20:00'),
-	(16, 27, 1, 2, 4, NULL, NULL, NULL, '', 1, '2022-04-14 03:21:10', '2022-04-15 02:29:38');
+	(16, 27, 1, 2, 4, NULL, NULL, NULL, '', 1, '2022-04-14 03:21:10', '2022-04-15 02:29:38'),
+	(17, 47, 1, 4, 4, '2312313213', 'asdawd', '3423234234', '', 1, '2022-05-21 12:40:33', '2022-05-21 12:40:33'),
+	(18, 48, 1, 4, 4, '345354345', 'asdawdla', '2312413443', '', 1, '2022-05-21 12:41:10', '2022-05-21 12:41:10'),
+	(19, 49, 1, 5, 4, '123123', 'asdawd', '321312', '', 1, '2022-05-21 12:43:49', '2022-05-21 12:43:49');
 /*!40000 ALTER TABLE `user_details` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

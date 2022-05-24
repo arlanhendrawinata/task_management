@@ -150,16 +150,14 @@
         text-decoration: blue underline;
         color: rgb(66, 103, 255);
     }
+
 </style>
 
 <div class="container-fluid">
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
-            <div class="welcome-text">
-                <h4>Hi, {{ Auth::user()->nama }}!</h4>
-                <span>Welcome to {{ $title }}</span>
-            </div>
         </div>
+
     </div>
     <div class="row">
         <div class="col-xl-3 col-lg-6 col-sm-6">
@@ -252,9 +250,7 @@
             <div class="card-header justify-content-between mx-2">
                 <div class="d-flex">
                     <div>
-                        @if(auth()->user()->can_add_task == 1)
                         <a href="{{ route('lead-task-create') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle "></i> Add Task</a>
-                        @endif
                         @if($currentUrl == "search")
                         <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#wideModal"> Fullscreen table</a>
                         @endif
@@ -324,12 +320,12 @@
                                 </td>
                                 <td style="width: 3%;">
                                     <?php
-                                    $dateinput = strtotime($item->tgl_input);
-                                    $dateestimasi = strtotime($item->estimasi);
-                                    $secs = $dateestimasi - $dateinput;
-                                    $dayestimasi = $secs / 86400;
-                                    echo $dayestimasi;
-                                    ?>
+                        $dateinput = strtotime($item->tgl_input);
+                        $dateestimasi = strtotime($item->estimasi);
+                        $secs = $dateestimasi - $dateinput;
+                        $dayestimasi = $secs / 86400;
+                        echo $dayestimasi;
+                        ?>
                                 </td>
                                 <td style="width: 5%;">
                                     @php
@@ -348,16 +344,16 @@
                                     @endphp
                                 </td>
                                 <td style="width: 3%;"><?php
-                                                        if ($item->tgl_selesai != null) {
-                                                            $dateselesai = strtotime($item->tgl_selesai);
-                                                            $dateestimasi2 = strtotime($item->estimasi);
-                                                            $secs = $dateestimasi2 - $dateselesai;
-                                                            $dayresult = $secs / 86400;
-                                                            echo $dayresult;
-                                                        } else {
-                                                            echo "-";
-                                                        }
-                                                        ?></td>
+                                            if ($item->tgl_selesai != null) {
+                                                $dateselesai = strtotime($item->tgl_selesai);
+                                                $dateestimasi2 = strtotime($item->estimasi);
+                                                $secs = $dateestimasi2 - $dateselesai;
+                                                $dayresult = $secs / 86400;
+                                                echo $dayresult;
+                                            } else {
+                                                echo "-";
+                                            }
+                                            ?></td>
                                 <td class="td-left">
                                     {{ Str::limit($item->detail_project, 50) }}
                                 </td>
@@ -379,43 +375,43 @@
                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#tambahstartModal{{$item->id}}">
                                         @endif
                                         <div class="infostatus bg-<?php
-                                                                    if ($item->status == 1) {
-                                                                        echo 'info';
-                                                                    } elseif ($item->status == 2) {
-                                                                        echo 'yellow';
-                                                                    } elseif ($item->status == 3) {
-                                                                        echo 'orange';
-                                                                    } elseif ($item->status == 4) {
-                                                                        echo 'teal';
-                                                                    } elseif ($item->status == 5) {
-                                                                        echo 'success';
-                                                                    } elseif ($item->status == 6) {
-                                                                        echo 'danger';
-                                                                    } elseif ($item->status == 7) {
-                                                                        echo 'red';
-                                                                    } elseif ($item->status == 0) {
-                                                                        echo 'grey';
-                                                                    }
-                                                                    ?>">
+                                                        if ($item->status == 1) {
+                                                            echo 'info';
+                                                        } elseif ($item->status == 2) {
+                                                            echo 'yellow';
+                                                        } elseif ($item->status == 3) {
+                                                            echo 'orange';
+                                                        } elseif ($item->status == 4) {
+                                                            echo 'teal';
+                                                        } elseif ($item->status == 5) {
+                                                            echo 'success';
+                                                        } elseif ($item->status == 6) {
+                                                            echo 'danger';
+                                                        } elseif ($item->status == 7) {
+                                                            echo 'red';
+                                                        } elseif ($item->status == 0) {
+                                                            echo 'grey';
+                                                        }
+                                                        ?>">
                                             <?php
-                                            if ($item->status == 1) {
-                                                echo 'Active';
-                                            } elseif ($item->status == 2) {
-                                                echo 'Progress';
-                                            } elseif ($item->status == 3) {
-                                                echo 'Submited';
-                                            } elseif ($item->status == 4) {
-                                                echo 'Approved';
-                                            } elseif ($item->status == 5) {
-                                                echo 'Success';
-                                            } elseif ($item->status == 6) {
-                                                echo 'Fail';
-                                            } elseif ($item->status == 7) {
-                                                echo 'Cancelled';
-                                            } elseif ($item->status == 0) {
-                                                echo 'Inactive';
-                                            }
-                                            ?>
+                                if ($item->status == 1) {
+                                    echo 'Active';
+                                } elseif ($item->status == 2) {
+                                    echo 'Progress';
+                                } elseif ($item->status == 3) {
+                                    echo 'Submited';
+                                } elseif ($item->status == 4) {
+                                    echo 'Approved';
+                                } elseif ($item->status == 5) {
+                                    echo 'Success';
+                                } elseif ($item->status == 6) {
+                                    echo 'Fail';
+                                } elseif ($item->status == 7) {
+                                    echo 'Cancelled';
+                                } elseif ($item->status == 0) {
+                                    echo 'Inactive';
+                                }
+                                ?>
                                         </div>
                                         @if($item->status == 1)
                                     </a>
@@ -663,12 +659,12 @@
                                         <td class="td-task" style="width: 15%;">{{ ucwords(strtolower($item->judul_project)) }}</td>
                                         <td>
                                             <?php
-                                            $dateinput = strtotime($item->tgl_input);
-                                            $dateestimasi = strtotime($item->estimasi);
-                                            $secs = $dateestimasi - $dateinput;
-                                            $dayestimasi = $secs / 86400;
-                                            echo $dayestimasi;
-                                            ?>
+                                    $dateinput = strtotime($item->tgl_input);
+                                    $dateestimasi = strtotime($item->estimasi);
+                                    $secs = $dateestimasi - $dateinput;
+                                    $dayestimasi = $secs / 86400;
+                                    echo $dayestimasi;
+                                    ?>
                                         </td>
                                         <td style="width: 5%;">
                                             @php
@@ -687,16 +683,16 @@
                                             @endphp
                                         </td>
                                         <td style="width: 2%;"><?php
-                                                                if ($item->tgl_selesai != null) {
-                                                                    $dateselesai = strtotime($item->tgl_selesai);
-                                                                    $dateestimasi2 = strtotime($item->estimasi);
-                                                                    $secs = $dateestimasi2 - $dateselesai;
-                                                                    $dayresult = $secs / 86400;
-                                                                    echo $dayresult;
-                                                                } else {
-                                                                    echo "-";
-                                                                }
-                                                                ?></td>
+                                                        if ($item->tgl_selesai != null) {
+                                                            $dateselesai = strtotime($item->tgl_selesai);
+                                                            $dateestimasi2 = strtotime($item->estimasi);
+                                                            $secs = $dateestimasi2 - $dateselesai;
+                                                            $dayresult = $secs / 86400;
+                                                            echo $dayresult;
+                                                        } else {
+                                                            echo "-";
+                                                        }
+                                                        ?></td>
                                         <td>
                                             @if($item->type == "Group")
                                             Group
@@ -710,66 +706,66 @@
                                         </td>
                                         <td class="td-status" style="width: 8%;">
                                             <div class="infostatus bg-<?php
-                                                                        if ($item->status == 1) {
-                                                                            echo 'info';
-                                                                        } elseif ($item->status == 2) {
-                                                                            echo 'yellow';
-                                                                        } elseif ($item->status == 3) {
-                                                                            echo 'orange';
-                                                                        } elseif ($item->status == 4) {
-                                                                            echo 'teal';
-                                                                        } elseif ($item->status == 5) {
-                                                                            echo 'success';
-                                                                        } elseif ($item->status == 6) {
-                                                                            echo 'danger';
-                                                                        } elseif ($item->status == 7) {
-                                                                            echo 'red';
-                                                                        } elseif ($item->status == 0) {
-                                                                            echo 'grey';
-                                                                        }
-                                                                        ?>">
+                                                                if ($item->status == 1) {
+                                                                    echo 'info';
+                                                                } elseif ($item->status == 2) {
+                                                                    echo 'yellow';
+                                                                } elseif ($item->status == 3) {
+                                                                    echo 'orange';
+                                                                } elseif ($item->status == 4) {
+                                                                    echo 'teal';
+                                                                } elseif ($item->status == 5) {
+                                                                    echo 'success';
+                                                                } elseif ($item->status == 6) {
+                                                                    echo 'danger';
+                                                                } elseif ($item->status == 7) {
+                                                                    echo 'red';
+                                                                } elseif ($item->status == 0) {
+                                                                    echo 'grey';
+                                                                }
+                                                                ?>">
                                                 <?php
-                                                if ($item->status == 1) {
-                                                    echo 'Active';
-                                                } elseif ($item->status == 2) {
-                                                    echo 'Progress';
-                                                } elseif ($item->status == 3) {
-                                                    echo 'Submited';
-                                                } elseif ($item->status == 4) {
-                                                    echo 'Approved';
-                                                } elseif ($item->status == 5) {
-                                                    echo 'Success';
-                                                } elseif ($item->status == 6) {
-                                                    echo 'Fail';
-                                                } elseif ($item->status == 7) {
-                                                    echo 'Cancelled';
-                                                } elseif ($item->status == 0) {
-                                                    echo 'Inactive';
-                                                }
-                                                ?>
+                                        if ($item->status == 1) {
+                                            echo 'Active';
+                                        } elseif ($item->status == 2) {
+                                            echo 'Progress';
+                                        } elseif ($item->status == 3) {
+                                            echo 'Submited';
+                                        } elseif ($item->status == 4) {
+                                            echo 'Approved';
+                                        } elseif ($item->status == 5) {
+                                            echo 'Success';
+                                        } elseif ($item->status == 6) {
+                                            echo 'Fail';
+                                        } elseif ($item->status == 7) {
+                                            echo 'Cancelled';
+                                        } elseif ($item->status == 0) {
+                                            echo 'Inactive';
+                                        }
+                                        ?>
                                             </div>
                                         </td>
                                         <?php
-                                        if ($item->tgl_selesai != null) {
-                                            $date = date("d/m/Y", strtotime($item->tgl_selesai));
-                                            $day_selesai = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('d');
-                                        } else {
-                                            $day_selesai = $item->tgl_selesai;
+                                if ($item->tgl_selesai != null) {
+                                    $date = date("d/m/Y", strtotime($item->tgl_selesai));
+                                    $day_selesai = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('d');
+                                } else {
+                                    $day_selesai = $item->tgl_selesai;
+                                }
+                                for ($i = 1; $i <= 31; $i++) {
+                                    if ($i == $day_selesai) {
+                                        if ($item->status == 5) {
+                                            echo '<td class=""><div class="box" style="background-color: blue; height: 40px;"></div></td>';
+                                        } elseif ($item->status == 2) {
+                                            echo '<td class=""><div class="box" style="background-color: #FCE83A; height: 40px;"></div></td>';
+                                        } elseif ($item->status == 6 || $item->status == 7) {
+                                            echo '<td class=""><div class="box" style="background-color: red; height: 40px;"></div></td>';
                                         }
-                                        for ($i = 1; $i <= 31; $i++) {
-                                            if ($i == $day_selesai) {
-                                                if ($item->status == 5) {
-                                                    echo '<td class=""><div class="box" style="background-color: blue; height: 40px;"></div></td>';
-                                                } elseif ($item->status == 2) {
-                                                    echo '<td class=""><div class="box" style="background-color: #FCE83A; height: 40px;"></div></td>';
-                                                } elseif ($item->status == 6 || $item->status == 7) {
-                                                    echo '<td class=""><div class="box" style="background-color: red; height: 40px;"></div></td>';
-                                                }
-                                            } else {
-                                                echo '<td></td>';
-                                            }
-                                        }
-                                        ?>
+                                    } else {
+                                        echo '<td></td>';
+                                    }
+                                }
+                                ?>
                                     </tr>
                                     @empty
                                     <tr>
@@ -837,13 +833,14 @@
         $('#detailModal').modal('hide');
         $('#tambahPICModal').modal('show');
         $.ajax({
-            type: "GET",
-            url: url,
-            success: function(response) {
+            type: "GET"
+            , url: url
+            , success: function(response) {
                 $('.picModalForm').html('');
                 $('.picModalForm').html(response);
             }
         });
     });
+
 </script>
 @endsection

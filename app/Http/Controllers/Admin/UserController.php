@@ -423,8 +423,23 @@ class UserController extends Controller
             'updated_at' => $currenttime,
         ]);
 
-
         return redirect()->route('goto-show-dbusers');
+    }
+
+    public function canAddTask(Request $request)
+    {
+        $data = User::with('userdetail')->where('id', $request->id)->first();
+        $currenttime = Carbon::Now();
+        $userRole = $data->userdetail->role;
+        if ($userRole != 3) {
+            return redirect()->route('goto-show-dbusers')->with('errors', 'The user must be the team leader');
+        } else {
+            $data->update([
+                'can_add_task' => $request->can_add_task,
+                'updated_at' => $currenttime,
+            ]);
+            return redirect()->route('goto-show-dbusers');
+        }
     }
 
 

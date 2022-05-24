@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'status',
         'password',
         'is_member',
+        'can_add_task',
     ];
 
     /**

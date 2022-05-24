@@ -135,7 +135,10 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function () {
     Route::post('/admin/checkpass', [\App\Http\Controllers\Admin\UserController::class, 'checkpass'])->name('goto-checkpass-dbusers');
     //USER - DETAILS - MODAL
     Route::get('/admin/detailuser{id}', [\App\Http\Controllers\Admin\UserController::class, 'index2'])->name('goto-showdetail-dbusers');
+
     Route::put('admin/user{id}{status}', [\App\Http\Controllers\Admin\UserController::class, 'updateStatus'])->name('goto-updateStatus-dbusers');
+
+    Route::put('admin/user/canAddTask/{id}/{val}', [\App\Http\Controllers\Admin\UserController::class, 'canAddTask'])->name('can-add-task');
 });
 
 //LEAD TIM
@@ -175,6 +178,8 @@ Route::group(['middleware' => ['auth', 'checkrole:3']], function () {
     Route::post('leadtim/addpic/', [App\Http\Controllers\Lead\ProjectController::class, 'storepic'])->name('lead-add-pic');
     Route::get('leadtim/pic/delete/{id}', [App\Http\Controllers\Lead\ProjectController::class, 'destroypic'])->name('lead-task-deletepic');
     Route::get('leadtim/show/pic/{id}', [App\Http\Controllers\Lead\ProjectController::class, 'showpic'])->name('lead-show-pic');
+
+    Route::put('leadtim/task/submit', [App\Http\Controllers\lead\ProjectController::class, 'leadSubmit'])->name('leader-submit-task');
 
 
     //Task Lead Detail

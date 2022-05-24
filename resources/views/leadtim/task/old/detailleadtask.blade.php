@@ -17,22 +17,46 @@
             <!-- add note button -->
             <a href="javascript:void(0)" class="btn btn-primary px-3 success ml-2" data-bs-toggle="modal" data-bs-target="#addNoteModal">
                 <i class="fa fa-comment mr-2"></i>Add note</a>
+            <!-- btn verifikasi -->
+            @if($project->status == 4)
+            <button class="btn btn-success px-3 success ml-2" style=" color: white;" disabled><i class="fa fa-check-square-o mr-2" style="color: white;"></i>Has been Approved</button>
+            @else
+            <?php
+            if ($getpics == 1) {
+
+            ?>
+            <form action="{{ route('lead-approve-task') }}" method="POST">
+                @method('put')
+                @csrf
+                <input type="number" name="id" value="{{ $project->id }}" hidden>
+                <input type="number" name="status" value="4" hidden>
+                <button type="submit" class="btn btn-success px-3 success ml-2" style="color: white;"><i class="fa fa-check-square-o" style="color: white;"></i> Approve</button>
+            </form>
+            <a href="javascript:void(0)" class="btn-revisi btn btn-danger px-3 success ml-2" data-bs-toggle="modal" data-bs-target="#revisiModal"><i class="fa fa-reply"></i> Revision ({{ $project->total_revisi }})</a>
+            <?php
+            } ?>
+            @endif
+            <!-- btn revisi -->
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="email-left-box generic-width px-0 mb-5">
+                    </div>
+                    <div class="row">
+                        {{-- <div class="col-12">
+                        </div> --}}
+                    </div>
                     <div class="read-content">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex flex-column align-items-start justify-content-start pt-3W">
-                                <h4>{{ ucwords(strtolower($project->judul_project)) }}</h4>
-                                <span> @foreach($pics as $pic)
-                                    @if($pic->project_id == $project->id)
-                                    {{ $pic->users->nama}}
-                                    @endif
-                                    @endforeach</span>
-                            </div>
+                        <div class="d-flex flex-column align-items-start justify-content-start pt-3W">
+                            <h4>{{ ucwords(strtolower($project->judul_project)) }}</h4>
+                            <span> @foreach($pics as $pic)
+                                @if($pic->project_id == $project->id)
+                                {{ $pic->users->nama}}
+                                @endif
+                                @endforeach</span>
                         </div>
                         <hr>
                         <div class="media mb-2 mt-3">
@@ -45,53 +69,24 @@
                         </div>
                         <div class="read-content-body">
                             <p class="mb-2">{{ $project->detail_project }}</p>
+                            <p class="mb-2">{{ $project->laporan_project }}</p>
+                            <hr>
                         </div>
-                        <hr>
-                        <div class="date-content-body d-flex">
-                            <div class="mr-4"><span>Start Date :</span> <span>{{ ($project->tgl_mulai != null) ? $project->tgl_mulai : '-' }}</span></div>
-                            <div class="mr-4"><span>Estimation :</span> <span>{{ ($project->estimasi != null) ? $project->estimasi : '-' }}</span></div>
-                            <div class="mr-4"><span>End Date :</span> <span>{{ ($project->tgl_selesai != null) ? $project->tgl_selesai : '-' }}</span></div>
-                        </div>
-                        <hr>
-                        <div class="form-group pt-3">
-                            <form action="{{ route('leader-submit-task') }}" method="post" enctype="multipart/form-data">
-                                @method('put')
-                                @csrf
-                                <input type="text" name="id" value="{{ $project->id }}" hidden>
-                                <div class="read-content-attachment">
-                                    @if($project->status <= 2) <h6><i class="fa fa-paperclip"></i> Attachments</h6>
-                                        <div class="fallback">
-                                            <input name="oldfoto" width="100%" type="text" value="{{ $project->foto_hasil }}" hidden />
-                                            <input name="foto_hasil" width="100%" type="file" />
-                                        </div>
-                                        @elseif ($project->status == 3)
-                                        <h6><i class="fa fa-download mb-2"></i> Attachments
-                                        </h6>
-                                        <a class="text-muted" href="{{ asset($project->foto_hasil) }}" data-lightbox="{{ $project->foto_hasil }}" data-title="{{ $project->foto_hasil }}"> View</a>
-                                        @endif
+                        <div class="read-content-attachment">
+                            <h6><i class="fa fa-download mb-2"></i> Attachments
+                            </h6>
+                            <div class="row attachment">
+                                <div class="col-auto">
+                                    <a class="text-muted" href="{{ asset('fotohasil/' . $project->foto_hasil) }}" data-lightbox="{{ $project->foto_hasil }}" data-title="{{ $project->foto_hasil }}">{{ $project->foto_hasil }}</a>
                                 </div>
-                                <div class="form-group">
-                                    <textarea id="notes" cols="30" rows="5" class="form-control" name="keterangan">{{ $project->laporan_project }}</textarea>
-                                    {{-- <p class="mb-2">{{ $project->laporan_project }}</p> --}}
-                                </div>
-                                @if($project->status != 4)
-                                @if($getpics == 1)
-                                @if($project->tgl_mulai != null)
-                                <button type="submit" class="btn btn-success px-3 success" style="color: white;"><i class="fa fa-check-square-o" style="color: white;"></i> Approve</button>
-                                @endif
-                                @endif
-                                @elseif($project->status == 4)
-                                <button class="btn btn-success px-3 success" style="color: white;" disabled><i class="fa fa-check-square-o mr-2" style="color: white;"></i> Approved</button>
-                                @endif
-                        </div>
-                        <div class="row">
-                            <div class="justify-content-sm-end mt-4 mt-sm-0 d-flex">
-                                <!-- btn revisi -->
-                                @if($project->status != 4)
-                                <a href="javascript:void(0)" class="btn-revisi btn btn-danger px-3 success ml-2" data-bs-toggle="modal" data-bs-target="#revisiModal"><i class="fa fa-reply"></i>
-                                    Revision ({{ $project->total_revisi }})</a>
-                                @endif
                             </div>
+                            <hr>
+                            <div class="date-content-body d-flex">
+                                <div class="mr-4"><span>Start Date :</span> <span>{{ ($project->tgl_mulai != null) ? $project->tgl_mulai : '-' }}</span></div>
+                                <div class="mr-4"><span>Estimation :</span> <span>{{ ($project->estimasi != null) ? $project->estimasi : '-' }}</span></div>
+                                <div class="mr-4"><span>End Date :</span> <span>{{ ($project->tgl_selesai != null) ? $project->tgl_selesai : '-' }}</span></div>
+                            </div>
+                            <hr>
                         </div>
                         <hr>
                     </div>

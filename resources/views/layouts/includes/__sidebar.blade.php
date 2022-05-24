@@ -96,7 +96,7 @@
             <!-- Master Data (User, Team, Client) -->
             @if(auth()->user()->userDetail->role == 1)
             <div class="nama-menu">
-                <span class="sidemenu-left-text"> Data </span>
+                <span class="sidemenu-left-text" style="border-top: 1px solid white; padding-top:20px; margin-top:20px;"> Data </span>
             </div>
             <li>
                 <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -154,7 +154,7 @@
 
             <!-- Task-->
             <div class="nama-menu">
-                <span class="sidemenu-left-text"> Task </span>
+                <span class="sidemenu-left-text" style="border-top: 1px solid white; padding-top:20px; margin-top:20px;"> Task </span>
             </div>
             <li>
                 <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -177,10 +177,10 @@
 
             <!-- Transaction-->
             <div class="nama-menu">
-                <span class="sidemenu-left-text"> Trx </span>
+                <span class="sidemenu-left-text" style="border-top: 1px solid white; padding-top:20px; margin-top:20px;"> Trx </span>
             </div>
-            <li class="@yield('active_finance')">
-                <a class="@yield('active_finance')" href="{{route('admin-finance-index')}}" aria-expanded="false" data-bs-toggle="tooltip" data-placement="right" title="Transaction">
+            <li>
+                <a class="" href="#@" aria-expanded="false" data-bs-toggle="tooltip" data-placement="right" title="Transaction">
                     <i class="flaticon-381-id-card"></i>
                     <span class="nav-text">Transaction</span>
                 </a>
@@ -188,7 +188,7 @@
 
             <!-- Report -->
             <div class="nama-menu">
-                <span class="sidemenu-left-text"> Rpt </span>
+                <span class="sidemenu-left-text" style="border-top: 1px solid white; padding-top:20px; margin-top:20px;"> Rpt </span>
             </div>
             <li>
                 <a class="has-arrow ai-icon" href="#2" aria-expanded="false">
@@ -218,7 +218,7 @@
 
 
             {{-- KETUA DAN ANGGOTA TIM --}}
-            @if(auth()->user()->userDetail->role == 3 || auth()->user()->userDetail->role == 4)
+            @if(auth()->user()->userDetail->role == 4)
             <li class="@yield('active_listtask')">
                 <a class="" href="{{route('user-list-task')}}" aria-expanded="false" data-bs-toggle="tooltip" data-placement="right" title="My Task">
                     <i class="flaticon-381-notebook-2"></i>
@@ -234,11 +234,13 @@
                     <span class="nav-text">Team Task</span>
                 </a>
                 <ul aria-expanded="false">
+                    @if(auth()->user()->can_add_task == 1)
                     <li class="@yield('active_leadtask')">
                         <a class="@yield('active_addleadtask')" href="{{route('lead-task-create')}}">
                             Add Team Task
                         </a>
                     </li>
+                    @endif
                     <li class="@yield('active_leadtask')">
                         <a class="@yield('active_leadtask')" href="{{route('lead-task-index')}}">
                             Team Task

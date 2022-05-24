@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\UrlGenerator;
+use Infotech\ImgBB\ImgBB;
 
 class ProjectController extends Controller
 {
@@ -76,13 +77,17 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $clients = Client::all();
-        $divisions = Division::all();
-        $users = User::all();
-        $companies = Company::all();
-        $pics = Pic::all();
-        $title = "Add Task";
-        return view('leadtim/task/tambahleadtask', compact('clients', 'divisions', 'users', 'companies', 'pics', 'title'));
+        if (auth()->user()->can_add_task == 1) {
+            $clients = Client::all();
+            $divisions = Division::all();
+            $users = User::all();
+            $companies = Company::all();
+            $pics = Pic::all();
+            $title = "Add Task";
+            return view('leadtim/task/tambahleadtask', compact('clients', 'divisions', 'users', 'companies', 'pics', 'title'));
+        } else {
+            return redirect()->route('lead-task-index')->with('errors', "You don't have permission");
+        }
     }
 
     /**
@@ -93,37 +98,41 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->can_add_task == 1) {
 
-        $data = array(
-            'client_id' => $request->client,
-            'divisi_id' => $request->division,
-            'user_id' => Auth::user()->id,
-            'perusahaan_id' => 1,
-            'judul_project' => ucwords($request->judul),
-            'detail_project' => ucwords($request->detail),
-            // 'tgl_mulai' => $request->tgl_mulai,
-            'tgl_input' => Carbon::now()->format('Y-m-d'),
-            'estimasi' => $request->estimasi,
-            'status' => 1,
-            'prioritas' => $request->prioritas,
-            'total_revisi' => $request->total_revisi,
-            'type' => $request->type,
-            'is_parent' => 0,
-            'project_id' => $request->project_id,
-            'project_id_2' => $request->project_id_2,
-            'debet' => $request->debet,
-            'kredit' => $request->kredit,
-        );
+            $data = array(
+                'client_id' => $request->client,
+                'divisi_id' => $request->division,
+                'user_id' => Auth::user()->id,
+                'perusahaan_id' => 1,
+                'judul_project' => ucwords($request->judul),
+                'detail_project' => ucwords($request->detail),
+                // 'tgl_mulai' => $request->tgl_mulai,
+                'tgl_input' => Carbon::now()->format('Y-m-d'),
+                'estimasi' => $request->estimasi,
+                'status' => 1,
+                'prioritas' => $request->prioritas,
+                'total_revisi' => $request->total_revisi,
+                'type' => $request->type,
+                'is_parent' => 0,
+                'project_id' => $request->project_id,
+                'project_id_2' => $request->project_id_2,
+                'debet' => $request->debet,
+                'kredit' => $request->kredit,
+            );
 
-        if ($request->type == "Single" || $request->type == "Sub1" || $request->type == "Sub2") {
-            $data['is_parent'] = 0;
-        } elseif ($request->type == "Group") {
-            $data['is_parent'] = 1;
+            if ($request->type == "Single" || $request->type == "Sub1" || $request->type == "Sub2") {
+                $data['is_parent'] = 0;
+            } elseif ($request->type == "Group") {
+                $data['is_parent'] = 1;
+            }
+
+            Project::create($data);
+
+            return redirect()->route('lead-task-index')->with('success', 'Task has been added');
+        } else {
+            return redirect()->route('lead-task-index')->with('errors', "You don't have permission");
         }
-
-        Project::create($data);
-
-        return redirect()->route('lead-task-index')->with('success', 'Task has been added');
     }
 
     /**
@@ -148,14 +157,19 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $clients = Client::all();
-        $divisions = Division::all();
-        $users = User::all();
-        $companies = Company::all();
-        $project = Project::with('companies', 'clients', 'divisions', 'users')->where('id', $id)->first();
-        $title = "Edit Task";
+        if (auth()->user()->can_add_task == 1) {
 
-        return view('leadtim/task/editleadtask', compact('project', 'companies', 'clients', 'divisions', 'users', 'title'));
+            $clients = Client::all();
+            $divisions = Division::all();
+            $users = User::all();
+            $companies = Company::all();
+            $project = Project::with('companies', 'clients', 'divisions', 'users')->where('id', $id)->first();
+            $title = "Edit Task";
+
+            return view('leadtim/task/editleadtask', compact('project', 'companies', 'clients', 'divisions', 'users', 'title'));
+        } else {
+            return redirect()->route('lead-task-index')->with('errors', "You don't have permission");
+        }
     }
 
     /**
@@ -168,51 +182,54 @@ class ProjectController extends Controller
     public function update(Request $request)
     {
 
+        if (auth()->user()->can_add_task == 1) {
+            // $test =  Project::where('id', $request->id)->first()->project_id;
+            // return $test;
+            $data = array(
+                'client_id' => $request->client,
+                'divisi_id' => $request->division,
+                'user_id' => $request->user,
+                'perusahaan_id' => $request->company,
+                'judul_project' => ucwords($request->judul_project),
+                'detail_project' => ucwords($request->detail_project),
+                'tgl_input' => $request->tanggal_input,
+                'tgl_mulai' => $request->tanggal_mulai,
+                'estimasi' => $request->estimasi,
+                // 'tgl_selesai' => $request->tanggal_selesai,
+                'status' => $request->status,
+                'prioritas' => $request->prioritas,
+                // 'total_revisi' => $request->revisi,
+                // 'laporan_project' => ucwords($request->laporan_project),
+                // 'foto_hasil' => $request->foto_hasil,
+                'type' => $request->type,
+                'is_parent' => 0,
+                // 'project_id' => $request->project_id,
+                // 'project_id_2' => $request->project_id_2,
+                // 'kredit' => $request->kredit,
+                // 'debet' => $request->debet,
+            );
 
-        // $test =  Project::where('id', $request->id)->first()->project_id;
-        // return $test;
-        $data = array(
-            'client_id' => $request->client,
-            'divisi_id' => $request->division,
-            'user_id' => $request->user,
-            'perusahaan_id' => $request->company,
-            'judul_project' => ucwords($request->judul_project),
-            'detail_project' => ucwords($request->detail_project),
-            'tgl_input' => $request->tanggal_input,
-            'tgl_mulai' => $request->tanggal_mulai,
-            'estimasi' => $request->estimasi,
-            // 'tgl_selesai' => $request->tanggal_selesai,
-            'status' => $request->status,
-            'prioritas' => $request->prioritas,
-            // 'total_revisi' => $request->revisi,
-            // 'laporan_project' => ucwords($request->laporan_project),
-            // 'foto_hasil' => $request->foto_hasil,
-            'type' => $request->type,
-            'is_parent' => 0,
-            // 'project_id' => $request->project_id,
-            // 'project_id_2' => $request->project_id_2,
-            // 'kredit' => $request->kredit,
-            // 'debet' => $request->debet,
-        );
+            if ($request->type == "Single" || $request->type == "Sub1" || $request->type == "Sub2") {
+                $data['is_parent'] = 0;
+            } elseif ($request->type == "Group") {
+                $data['is_parent'] = 1;
+            }
 
-        if ($request->type == "Single" || $request->type == "Sub1" || $request->type == "Sub2") {
-            $data['is_parent'] = 0;
-        } elseif ($request->type == "Group") {
-            $data['is_parent'] = 1;
+            $project = Project::find($request->id)->update($data);
+
+            // return $request->id;
+
+            if ($request->type == "Group" || $request->type == "Single") {
+                return redirect()->route('lead-task-single', $request->id)->with('success', 'Task has been updated');
+            } elseif ($request->type == "Sub1") {
+                $parentid = Project::select('project_id')->where('id', $request->id)->first();
+                return redirect()->route('lead-task-single', $parentid->project_id)->with('success', 'Task has been updated');
+            } elseif ($request->type == "Sub2")
+                $parentid = Project::select('project_id_2')->where('id', $request->id)->first();
+            return redirect()->route('lead-task-single', $parentid->project_id_2)->with('success', 'Task has been updated');
+        } else {
+            return redirect()->route('lead-task-index')->with('errors', "You don't have permission");
         }
-
-        $project = Project::find($request->id)->update($data);
-
-        // return $request->id;
-
-        if ($request->type == "Group" || $request->type == "Single") {
-            return redirect()->route('lead-task-single', $request->id)->with('success', 'Task has been updated');
-        } elseif ($request->type == "Sub1") {
-            $parentid = Project::select('project_id')->where('id', $request->id)->first();
-            return redirect()->route('lead-task-single', $parentid->project_id)->with('success', 'Task has been updated');
-        } elseif ($request->type == "Sub2")
-            $parentid = Project::select('project_id_2')->where('id', $request->id)->first();
-        return redirect()->route('lead-task-single', $parentid->project_id_2)->with('success', 'Task has been updated');
     }
 
     /**
@@ -223,9 +240,14 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        $project = Project::find($id);
-        $project->delete();
-        return redirect()->route('lead-task-index')->with('success', 'Task has been deleted');
+        if (auth()->user()->can_add_task == 1) {
+
+            $project = Project::find($id);
+            $project->delete();
+            return redirect()->route('lead-task-index')->with('success', 'Task has been deleted');
+        } else {
+            return redirect()->route('lead-task-index')->with('errors', "You don't have permission");
+        }
     }
     public function searchDateLead(Request $request)
     {
@@ -544,5 +566,30 @@ class ProjectController extends Controller
         $pics = Pic::all();
         $project = Project::with('companies', 'clients', 'divisions', 'users')->where('id', $id)->first();
         return view('leadtim.task.leadtaskpic', compact('project', 'pics', 'users'));
+    }
+
+    public function leadSubmit(Request $request)
+    {
+
+        if ($request->foto_hasil != NULL) {
+            $namaasli = $request->file('foto_hasil')->getClientOriginalName();
+            $image = ImgBB::image($request->file('foto_hasil'), $namaasli);
+
+            Project::find($request->id)
+                ->update([
+                    'laporan_project' => $request->keterangan,
+                    'tgl_selesai' => date('Y-m-d'),
+                    'status' => 4,
+                    'foto_hasil' => $image["data"]["url"],
+                ]);
+        } else {
+            Project::find($request->id)
+                ->update([
+                    'laporan_project' => $request->keterangan,
+                    'tgl_selesai' => date('Y-m-d'),
+                    'status' => 4,
+                ]);
+        }
+        return redirect()->route('lead-task-index')->with('success', 'Task has been Approved');
     }
 }
