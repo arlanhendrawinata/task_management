@@ -305,11 +305,30 @@ let dataSet = [
             $row.addClass("selected");
         }
     });
+
     table2.rows().every(function () {
         this.nodes().to$().removeClass("selected");
     });
+
+    var table = $("#tableEx").DataTable({
+        createdRow: function (row, data, index) {
+            $(row).addClass("selected");
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            'print'
+        ],
+        "searching": false,
+        "lengthChange": false,
+        "paging": false
+    });
+    table.rows().every(function () {
+        this.nodes().to$().removeClass("selected");
+    });
+
     var table = $("#example3, #example4, #example5").DataTable();
     $("#example tbody").on("click", "tr", function () {
         var data = table.row(this).data();
     });
+
 })(jQuery);

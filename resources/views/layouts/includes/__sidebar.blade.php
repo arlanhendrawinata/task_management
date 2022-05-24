@@ -196,13 +196,13 @@
                     <span class="nav-text">Report</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li class="@yield('#')">
-                        <a class="" href="#@3">
+                    <li class="@yield('active_reporttask')">
+                        <a class="" href="{{route('admin-task-reporttask')}}">
                             Report Task
                         </a>
                     </li>
                     <li class="@yield('#')">
-                        <a class="" href="#@2">
+                        <a class="" href="{{route('admin-finance-report')}}">
                             Report Transaction
                         </a>
                     </li>

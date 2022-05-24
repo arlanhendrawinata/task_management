@@ -70,6 +70,10 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2']], function () {
     Route::post('task/addpic', [App\Http\Controllers\Admin\ProjectController::class, 'addpic'])->name('admin-add-pic');
     Route::get('/task/pic/delete/{id}', [App\Http\Controllers\Admin\ProjectController::class, 'adddestroypic'])->name('admin-deletepic');
     Route::get('/task/pic/{id}', [App\Http\Controllers\Admin\ProjectController::class, 'showpic'])->name('admin-show-pic');
+    Route::get('/task/reporttask', [App\Http\Controllers\Admin\ProjectController::class, 'reporttask'])->name('admin-task-reporttask');
+    // Cetak Report
+    Route::get('/task/cetakproject', [App\Http\Controllers\Admin\ProjectController::class, 'laporanprojects'])->name('admin-cetak-projects');
+    Route::get('/loglogin/cetaklogin', [App\Http\Controllers\Admin\ProjectController::class, 'laporanlogin'])->name('admin-cetak-login');
 
 
     // TASK DETAIL
@@ -113,6 +117,7 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2']], function () {
     Route::get('/finance/edit/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'edit'])->name('admin-finance-edit');
     Route::put('/finance/update', [App\Http\Controllers\Admin\FinanceController::class, 'update'])->name('admin-finance-update');
     Route::get('/finance/delete/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'destroy'])->name('admin-finance-delete');
+    Route::get('/finance/report', [App\Http\Controllers\Admin\FinanceController::class, 'reportfinance'])->name('admin-finance-report');
 
     //LOGLOGIN
     Route::get('/loglogin', [\App\Http\Controllers\Admin\LoginLogsController::class, 'index'])->name('goto-show-loglogin');

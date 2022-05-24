@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Company;
 use App\Models\Division;
+use App\Models\LoginLogs;
 use App\Models\Note;
 use App\Models\Pic;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -984,5 +986,94 @@ class ProjectController extends Controller
         $tableTitle = "All Task";
         $divisions = Division::all();
         return view('admin.task.tasktable', compact('countMonth', 'month', 'name', 'val', 'divisions', 'tableTitle', 'currentUrl', 'projects', 'users', 'pics', 'clients', 'title'));
+    }
+    public function reporttask()
+    {
+        // $year = Carbon::now()->year;
+        // $month = Carbon::now()->month;
+        // $days = Carbon::now()->daysInMonth;
+        // $dateNowFrom = Carbon::createFromDate($year, $month, 0);
+        // $dateNowTo = Carbon::createFromDate($year, $month, $days + 1);
+        $clients = Client::all();
+        $users = User::all();
+        $projects = Project::with('companies', 'clients', 'divisions', 'users')
+            ->whereIn('type', ['Single', 'Group'])
+            // ->where("tgl_input", "<=", $dateNowTo)
+            ->orderBy('status', 'asc')
+            ->orderBy('id', 'desc')->get();
+        $pics = Pic::with('projects')->get();
+        $currentUrl = "index";
+        $title = 'Task';
+        $tableTitle = "All Task";
+        $divisions = Division::all();
+        $name = "";
+        $val = "";
+        $countMonth = 1;
+        $month = "";
+
+        return view('admin.task.reporttask', compact('month', 'countMonth', 'name', 'val', 'divisions', 'tableTitle', 'currentUrl', 'projects', 'users', 'pics', 'clients', 'title'));
+    }
+
+    public function laporanprojects()
+    {
+        $clients = Client::all();
+        $users = User::all();
+        $projects = Project::with('companies', 'clients', 'divisions', 'users')
+            ->whereIn('type', ['Single', 'Group'])
+            // ->where("tgl_input", "<=", $dateNowTo)
+            ->orderBy('status', 'asc')
+            ->orderBy('id', 'desc')->get();
+        $pics = Pic::with('projects')->get();
+        $currentUrl = "index";
+        $title = 'Laporan Task';
+        $tableTitle = "All Task";
+        $divisions = Division::all();
+        $name = "";
+        $val = "";
+        $countMonth = 1;
+        $month = "";
+
+        return view('admin.task.cetakproject', compact('month', 'countMonth', 'name', 'val', 'divisions', 'tableTitle', 'currentUrl', 'projects', 'users', 'pics', 'clients', 'title'));
+    }
+    public function laporanlogin()
+    {
+        //
+        $title = "Log Login";
+
+        $loginlog["allData"] = LoginLogs::all();
+
+        $x = 0;
+        $collection = new Collection();
+        foreach ($loginlog["allData"] as $item2) {
+            $findnama = User::where('id', $item2->user_id)->first();
+
+            if ($findnama != null) {
+                $data["UserData"][$x] = $findnama;
+                $data["LoginlogData"][$x] = $item2;
+
+                $collection->push(
+                    (object)[
+                        'nama' => $data["UserData"][$x]->nama,
+                        'email' => $data["UserData"][$x]->email,
+                        'id' => $data["LoginlogData"][$x]->id,
+                        'user_id' => $data["LoginlogData"][$x]->user_id,
+                        'ip_address' => $data["LoginlogData"][$x]->ip_address,
+                        'mac_address' => $data["LoginlogData"][$x]->mac_address,
+                        'browser' => $data["LoginlogData"][$x]->browser,
+                        'created_at' => $data["LoginlogData"][$x]->created_at,
+                        'updated_at' => $data["LoginlogData"][$x]->updated_at
+                    ]
+                );
+
+                $x++;
+            }
+        };
+
+        $collection = $collection->sortByDesc('id');
+        // @dd($collection);
+
+        return view('admin.task.cetakloglogin', ['Data' => $collection, 'title' => $title]);
+
+        // return view('admin/loglogin', ['Data' => $collection, 'title' => $title]);
     }
 }
