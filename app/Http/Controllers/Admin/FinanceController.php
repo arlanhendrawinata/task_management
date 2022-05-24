@@ -143,4 +143,13 @@ class FinanceController extends Controller
         $finance = Finance::find($id)->delete();
         return redirect()->route('admin-finance-index')->with('success', 'Finance has been deleted');
     }
+    public function reportfinance()
+    {
+        $finances = Finance::OrderByDesc('id')->get();
+
+        $title = 'Finance';
+
+        $tableTitle = "All Finance";
+        return view('admin.finance.reportfinance', compact('finances', 'title', 'tableTitle'));
+    }
 }

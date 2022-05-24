@@ -19,13 +19,13 @@
 <div class="header">
     <div class="header-content">
         <nav class="navbar navbar-expand">
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse justify-content-between">
                 <div class="header-left">
                     <div class="dashboard_bar"> {{ ucwords(strtolower($title)) }} </div>
                 </div>
-                <div class="search-container">
+                <!-- <div class="search-container">
                     <select class="js-search"></select>
-                </div>
+                </div> -->
                 <ul class="navbar-nav header-right">
                     <li class="nav-item dropdown notification_dropdown">
                         <a class="nav-link  ai-icon" href="javascript:;" role="button" data-toggle="dropdown">

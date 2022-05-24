@@ -58,7 +58,6 @@
     .table.dataTable tr.selected {
         color: #3e4954;
     }
-
 </style>
 
 <div class="container-fluid">
@@ -68,11 +67,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <!--<h4 class="card-title">Log Login</h4> -->
                 </div>
                 <div class="card-body">
                     <div class="table-bordered table-responsive" style="padding:10px;">
-                        <table id="tableEx" class="loginLogTable table table-striped " style="max-width: 95%;">
+                        <table id="table" class="loginLogTable table table-striped " style="max-width: 95%;">
                             <thead>
                                 <tr>
                                     {{-- <th>ID</th> --}}
@@ -85,10 +83,10 @@
                             </thead>
 
                             <tbody>
-                                <?php 
-                                    
-                                    $i = 0
-                                    
+                                <?php
+
+                                $i = 0
+
                                 ?>
                                 @foreach ($Data as $item)
                                 <tr>
@@ -114,6 +112,17 @@
 </div>
 
 @section('scriptjs')
-
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print'
+            ],
+            "lengthChange": false,
+            "paging": false
+        });
+    });
+</script>
 @endsection
 @endsection
