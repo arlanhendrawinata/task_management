@@ -868,7 +868,6 @@
 @section('scriptjs')
     <script>
         $('.js-example-basic-single').select2();
-
         $(document).on('click', '.btn-addpic', function(event) {
             event.preventDefault();
             let id = $(this).attr('data-id');

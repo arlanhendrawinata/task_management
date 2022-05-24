@@ -9,6 +9,10 @@ use App\Models\User;
 use App\Models\Pic;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
+use App\Notifications\NoteNotification;
+use Illuminate\Support\Facades\Notification;
+
 use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
@@ -18,6 +22,10 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $users = User::all();
@@ -60,6 +68,7 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         $project_getuser = Project::all()->where('id', $request->project)->first();
+        $user = User::first();
         Note::create([
             'project_id' => $request->project,
             'user_id' => Auth::id(),
@@ -67,6 +76,16 @@ class NoteController extends Controller
         ]);
 
         $project = Project::all()->where('id', $request->project)->first();
+
+
+        $noteNotif = [
+            'project_id' => $request->project,
+            'user_id' => Auth::id(),
+            'keterangan' => $request->keterangan,
+        ];
+
+        Notification::send($user, new NoteNotification($noteNotif));
+
         return redirect()->back()->with('success', 'New note has been added to project ' . $project->judul_project);
     }
 

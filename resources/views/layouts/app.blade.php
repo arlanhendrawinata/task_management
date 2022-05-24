@@ -159,6 +159,26 @@
 
 <body>
     <div id="main-wrapper">
+        <div class="card-body">
+            @dd($noteNotif);
+            @forelse($noteNotif as $notification)
+            <div class="alert alert-success" role="alert">
+                [{{ $notification->created_at }}] User {{ $notification->data['user_id'] }} Project {{ $notification->data['project_id'] }} Keterangan {{ $notification->data['keterangan'] }}.
+                <a href="#" class="float-right mark-as-read" data-id="{{ $notification->id }}">
+                    Mark as read
+                </a>
+            </div>
+
+            @if($loop->last)
+            <a href="#" id="mark-all">
+                Mark all as read
+            </a>
+            @endif
+            @empty
+            There are no new notifications
+            @endforelse
+        </div>
+
         @include('layouts.includes.__header')
         @include('layouts.includes.__sidebar')
     </div>

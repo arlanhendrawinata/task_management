@@ -56,8 +56,9 @@ class DashboardController extends Controller
         $name = "";
         $val = "";
 
+        $noteNotif = auth()->user()->unreadNotifications;
 
-        return view('admin.dashboard', compact('name', 'val', 'divisions', 'users', 'currentUrl', 'clients', 'projects', 'pics', 'title', 'countActive', 'countProcess', 'countSubmit', 'countVerif', 'countSuccess', 'countCancle', 'tableTitle'));
+        return view('admin.dashboard', compact('noteNotif', 'name', 'val', 'divisions', 'users', 'currentUrl', 'clients', 'projects', 'pics', 'title', 'countActive', 'countProcess', 'countSubmit', 'countVerif', 'countSuccess', 'countCancle', 'tableTitle'));
     }
 
     public function search(Request $request)
