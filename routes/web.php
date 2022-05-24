@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('/postlogin', [App\Http\Controllers\LoginController::class, 'postlogin'])->name('postlogin');
 Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+
+Route::get('/ForgotPassword', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'index'])->name('forgot-password-page');
+Route::post('/ForgotPassword2', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'send'])->name('forgot-password-send');
+
+Route::get('go-reset-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'goLogin'])->name('go-reset-password');
 // Route::get('/reset', function () {
 //     return view('auth.passwords.reset');
 // });
@@ -219,4 +224,3 @@ Route::group(['middleware' => ['auth']], function () {
 // Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
 
 Route::get('go-verify/{id}', [App\Http\Controllers\EmailController::class, 'goVerify'])->name('go-verify');
-Route::get('dd', [App\Http\Controllers\EmailController::class, 'notif'])->name('ppp');
